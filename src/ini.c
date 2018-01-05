@@ -37,14 +37,14 @@ void	ft_ini_sphere(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->sphere->color = (t_color*)malloc(sizeof(t_color))))
 		ft_malloc_error();
-	rt->sphere->radius = 0.2;
+	rt->sphere->radius = 2;
 	rt->sphere->color->r = 0;
 	rt->sphere->color->g = 1;
 	rt->sphere->color->b = 0;
 	rt->sphere->next = NULL;
-	rt->sphere->o->x = 0.3;
-	rt->sphere->o->y = 0.2;
-	rt->sphere->o->z = 3.0;
+	rt->sphere->o->x = 3;
+	rt->sphere->o->y = 2;
+	rt->sphere->o->z = 30.0;
 }
 
 void	ft_ini_plane(t_rt *rt)
@@ -120,13 +120,13 @@ void	ft_ini_light(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->light->color = (t_color*)malloc(sizeof(t_color))))
 		ft_malloc_error();
-	rt->light->color->r = 0.0;
-	rt->light->color->g = 1.0;
-	rt->light->color->b = 0;
-	rt->light->o->x = rt->view->length;
-	rt->light->o->y = rt->view->height;
-	rt->light->o->z = 2.0;
-	rt->light->power = 0.2;
+	rt->light->color->r = 1.0;
+	rt->light->color->g = 0.0;
+	rt->light->color->b = 1.0;
+	rt->light->o->x = 0.0;
+	rt->light->o->y = 0.0;
+	rt->light->o->z = 25.0;
+	rt->light->power = 1.0;
 }
 
 void	ft_ini(t_rt *rt)

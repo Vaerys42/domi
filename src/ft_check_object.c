@@ -21,25 +21,18 @@ void		ft_get_point(t_rt *rt)
 void		ft_get_light(t_rt *rt)
 {
 	double		angle;
-	double	k;
 
-	rt->color->r = rt->sphere->color->r * rt->light->power;
-	rt->color->g = rt->sphere->color->g * rt->light->power;
-	rt->color->b = rt->sphere->color->b * rt->light->power;
-
-
-	rt->light_ray->o = ft_sub_vect(rt->inter, rt->light->o);
+	rt->light_ray->o = ft_sub_vect(rt->light->o, rt->inter);
 	rt->light_ray->dir = ft_div_vect(ft_norm_2(rt->light_ray->o), rt->light_ray->o);
 	rt->angle_ray->o = ft_sub_vect(rt->inter, rt->sphere->o);
 	rt->angle_ray->dir = ft_div_vect(ft_norm_2(rt->angle_ray->o), rt->angle_ray->o);
 	angle = scal(rt->light_ray->dir, rt->angle_ray->dir);
 
 	angle = (angle < 0.1) ? 0.1 : angle;
-	k = 0.9;
 
-	rt->color->r = rt->color->r + rt->light->color->r * angle * k;
-	rt->color->g = rt->color->g + rt->light->color->g * angle * k;
-	rt->color->b = rt->color->b + rt->light->color->b * angle * k;
+	rt->color->r = rt->light->color->r * angle * rt->light->power;
+	rt->color->g = rt->light->color->g * angle * rt->light->power;
+	rt->color->b = rt->light->color->b * angle * rt->light->power;
 	//printf("r%f g%f b%f\n", rt->color->r, rt->color->g, rt->color->b );
 }
 
