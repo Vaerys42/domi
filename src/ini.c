@@ -57,9 +57,9 @@ void	ft_ini_plane(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->plane->o = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	rt->plane->color->r = 0;
-	rt->plane->color->g = 0;
-	rt->plane->color->b = 1;
+	rt->plane->color->r = 0.0;
+	rt->plane->color->g = 0.1;
+	rt->plane->color->b = 0.0;
 	rt->plane->next = NULL;
 	rt->plane->norm->x = 0;
 	rt->plane->norm->y = 1;
@@ -74,12 +74,8 @@ void	ft_ini_plane(t_rt *rt)
 
 void	ft_ini_viewplane(t_rt *rt)
 {
-	//double			focal;
-
 	if (!(rt->view = (t_view*)malloc(sizeof(t_view))))
 		ft_malloc_error();
-	//focal = sqrt(WIN_LEN * WIN_LEN + WIN_HEIGHT * WIN_HEIGHT) / (2 * tan((90 * M_PI / 180) / 2));
-	//rt->view->screen_ratio = (float)WIN_LEN / WIN_HEIGHT;
 	rt->view->height = 0.35;
 	rt->view->length = 0.5;
 	rt->cam->pos->x = rt->view->length / 2;
@@ -124,7 +120,7 @@ void	ft_ini_light(t_rt *rt)
 	if (!(rt->light->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	rt->light->color->r = 1.0;
-	rt->light->color->g = 0.0;
+	rt->light->color->g = 1.0;
 	rt->light->color->b = 1.0;
 	rt->light->o->x = 0.0;
 	rt->light->o->y = 0.0;
@@ -141,21 +137,15 @@ void	ft_ini(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->angle_ray = (t_ray*)malloc(sizeof(t_ray))))
 		ft_malloc_error();
-	if (!(rt->sphere_ray = (t_ray*)malloc(sizeof(t_ray))))
-		ft_malloc_error();
 	if (!(rt->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	if (!(rt->icolor = (t_icolor*)malloc(sizeof(t_icolor))))
 		ft_malloc_error();
 	if (!(rt->inter = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	if (!(rt->zcolor = (t_material*)malloc(sizeof(t_material))))
-		ft_malloc_error();
-	rt->zcolor->r = 0.0;
-	rt->zcolor->g = 0.0;
-	rt->zcolor->b = 0.0;
 	ft_ini_cam(rt);
 	ft_ini_sphere(rt);
 	ft_ini_plane(rt);
 	ft_ini_light(rt);
+	rt->ray->o = rt->cam->pos;
 }

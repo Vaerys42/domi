@@ -28,6 +28,12 @@ void	put_pxl(t_data *data, int x, int y, t_icolor *color)
 
 void		ft_convert(t_rt *rt)
 {
+	if (rt->color->r > 1.0)
+		rt->color->r = 1.0;
+	if (rt->color->g > 1.0)
+		rt->color->g = 1.0;
+	if (rt->color->b > 1.0)
+		rt->color->b = 1.0;
 	rt->icolor->r = (rt->color->r * 255);
 	rt->icolor->g = (rt->color->g * 255);
 	rt->icolor->b = (rt->color->b * 255);
@@ -44,7 +50,6 @@ void		ft_ray(t_rt *rt, int x, int y)
 
 void		ft_ini_ray(t_rt *rt, int x, int y)
 {
-
 	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left, ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)), ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
 	//rt->ray->dir = ft_sub_vect(rt->ray->o, rt->cam->pos);
 	//rt->ray->dir = ft_sub_vect(rt->ray->dir, rt->cam->pos);

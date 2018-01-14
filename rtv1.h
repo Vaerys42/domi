@@ -16,6 +16,7 @@
 # define WIN_LEN 640
 # define WIN_HEIGHT 480
 # define PLN_DST 1.0
+# define AMB_LIGHT 0.2
 
 # include "libft/includes/libft.h"
 # include "minilibx_macos/mlx.h"
@@ -129,11 +130,9 @@ typedef	struct			s_rt
 	t_material			*color;
 	t_icolor			*icolor;
 	t_coo 				*inter;
-	t_material 			*zcolor;
 	double				dst;
 	t_ray				*light_ray;
 	t_ray				*angle_ray;
-	t_ray				*sphere_ray;
 }						t_rt;
 
 void					ft_malloc_error(void);

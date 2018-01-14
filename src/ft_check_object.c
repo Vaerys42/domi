@@ -30,41 +30,44 @@ void		ft_get_light(t_rt *rt)
 
 	angle = (angle < 0.1) ? 0.1 : angle;
 
-	rt->color->r = rt->light->color->r * angle * rt->light->power;
-	rt->color->g = rt->light->color->g * angle * rt->light->power;
-	rt->color->b = rt->light->color->b * angle * rt->light->power;
+	rt->color->r = rt->color->r * rt->light->color->r * angle * rt->light->power;
+	rt->color->g = rt->color->g * rt->light->color->g * angle * rt->light->power;
+	rt->color->b = rt->color->b * rt->light->color->b * angle * rt->light->power;
 }
 
-double				ft_check_plane(t_rt *rt)
+double				ft_check_plane(t_plane *plane, t_ray *ray)
 {
 	double		a;
 	double		b;
 
-	b = scal(rt->plane->norm, rt->ray->dir);
+	b = scal(plane->norm, ray->dir);
 	if (b == 0)
 		return (-1);
-	a = scal(rt->plane->norm, rt->cam->pos) + rt->plane->supp;
+	a = scal(plane->norm, ray->o) + plane->supp;
 	return (-a / b);
 }
 
-double				ft_check_sphere(t_rt *rt)
+double				ft_check_sphere(t_sphere *sphere, t_ray *ray)
 {
-	double OH;
-	double CHCH;
-	double RR;
-	double ta;
-	double tb;
+	double	OH;
+	double	CHCH;
+	double	RR;
+	double	ta;
+	double	tb;
+	t_coo	sphere_ray;
 
-	rt->sphere_ray->o = ft_sub_vect(rt->sphere->o, rt->cam->pos);
-	OH = scal(rt->ray->dir, rt->sphere_ray->o);
+	sphere_ray.x = sphere->o->x - ray->o->x;
+	sphere_ray.y = sphere->o->y - ray->o->y;
+	sphere_ray.z = sphere->o->z - ray->o->z;
+	OH = scal(ray->dir, &sphere_ray);
 	if (OH >= 0)
 	{
-		CHCH = pow(ft_norm_2(rt->sphere_ray->o),2) - (OH * OH);
-		RR = rt->sphere->radius * rt->sphere->radius;
+		CHCH = pow(ft_norm_2(&sphere_ray),2) - (OH * OH);
+		RR = sphere->radius * sphere->radius;
 		if (CHCH <= RR)
 		{
-			ta = ft_norm(rt->ray->dir, rt->sphere_ray->o) + sqrt(RR - CHCH);
-			tb = ft_norm(rt->ray->dir, rt->sphere_ray->o) - sqrt(RR - CHCH);
+			ta = ft_norm(ray->dir, &sphere_ray) + sqrt(RR - CHCH);
+			tb = ft_norm(ray->dir, &sphere_ray) - sqrt(RR - CHCH);
 			if (ta >= tb)
 				return(tb);
 			return(ta);
@@ -75,20 +78,20 @@ double				ft_check_sphere(t_rt *rt)
 
 void			ft_check_object(t_rt *rt)
 {
-	double tmp;
+	//double tmp;
 
-	rt->dst = ft_check_sphere(rt);
-	tmp = ft_check_plane(rt);
-	if (tmp < 0)
-		printf("%f\n", tmp);
-	/*if (tmp < rt->dst)
-		rt->dst = tmp;*/
+	/*if ((rt->dst = ft_check_sphere(rt->sphere, rt->ray)) > 0)
+		rt->color = rt->sphere->color;*/
+	rt->color->r = 0.0;
+	rt->color->g = 0.0;
+	rt->color->b = 0.0;
+	if ((rt->dst = ft_check_plane(rt->plane, rt->ray)) < 0){
+		rt->color = rt->plane->color;
+	}
 	if (rt->dst <= 0.01)
 		rt->dst = 0;
-	rt->color = rt->zcolor;
 	if (rt->dst != 0)
 	{
-		rt->color = rt->sphere->color;
 		ft_get_point(rt);
 		ft_get_light(rt);
 	}
