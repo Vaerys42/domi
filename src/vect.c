@@ -79,10 +79,10 @@ t_coo		*ft_sub_vect(t_coo *vect1, t_coo *vect2)
 	return (new);
 }
 
-double		scal(t_coo *vect1, t_coo *vect2)
+double		scal(t_coo *v1, t_coo *v2)
 {
 	double		rslt;
 
-	rslt = vect1->x * vect2->x + vect1->y * vect2->y + vect1->z * vect2->z;
+	rslt = (v1->x * v2->x) + v1->y * v2->y + v1->z * v2->z;
 	return (rslt);
 }

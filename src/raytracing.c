@@ -36,8 +36,8 @@ void		ft_convert(t_rt *rt)
 void		ft_ray(t_rt *rt, int x, int y)
 {
 	ft_check_object(rt);
-	//if (rt->color->r == 0 && rt->color->g == 0 && rt->color->b == 0)
-	//	return ;
+	if (rt->color->r == 0 && rt->color->g == 0 && rt->color->b == 0)
+		return ;
 	ft_convert(rt);
 	put_pxl(rt->data, x, y, rt->icolor);
 }
@@ -58,13 +58,9 @@ void		ft_raytracing(t_rt *rt)
 
 	y = -1;
 	while (++y <= WIN_HEIGHT)
-	//y = 350;
-	//while (++y <= 450)
 	{
 		x = -1;
 		while (++x <= WIN_LEN)
-		//x = 450;
-		//while (++x <= 550)
 		{
 			ft_ini_ray(rt, x, y);
 			ft_ray(rt, x, y);

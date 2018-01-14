@@ -21,12 +21,12 @@
 # include "minilibx_macos/mlx.h"
 # include "math.h"
 
-typedef	struct 			s_color
+typedef	struct 			s_material
 {
 	double				r;
 	double				g;
 	double				b;
-}						t_color;
+}						t_material;
 
 typedef struct 			s_icolor
 {
@@ -58,7 +58,7 @@ typedef struct 			s_cylinder
 {
 	t_coo				*o;
 	double				radius;
-	t_color				*color;
+	t_material			*color;
 	double				height;
 }						t_cylinder;
 
@@ -66,7 +66,7 @@ typedef	struct 			s_cone
 {
 	t_coo				*o;
 	double				radius;
-	t_color				*color;
+	t_material			*color;
 	double				height;
 	struct s_cone		*next;
 }						t_cone;
@@ -75,22 +75,23 @@ typedef	struct 			s_sphere
 {
 	t_coo				*o;
 	double				radius;
-	t_color				*color;
+	t_material			*color;
 	struct s_sphere		*next;
 }						t_sphere;
 
 typedef	struct 			s_plane
 {
-	t_color				*color;
+	t_material			*color;
 	t_coo				*norm;
 	t_coo 				*o;
+	double				supp;
 	struct s_plane		*next;
 }						t_plane;
 
 typedef struct 			s_light
 {
 	t_coo 				*o;
-	t_color 			*color;
+	t_material 			*color;
 	double				power;
 }						t_light;
 
@@ -125,10 +126,10 @@ typedef	struct			s_rt
 	t_sphere			*sphere;
 	t_plane				*plane;
 	t_view				*view;
-	t_color				*color;
+	t_material			*color;
 	t_icolor			*icolor;
 	t_coo 				*inter;
-	t_color 			*zcolor;
+	t_material 			*zcolor;
 	double				dst;
 	t_ray				*light_ray;
 	t_ray				*angle_ray;

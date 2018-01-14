@@ -35,7 +35,7 @@ void	ft_ini_sphere(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->sphere->o = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	if (!(rt->sphere->color = (t_color*)malloc(sizeof(t_color))))
+	if (!(rt->sphere->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	rt->sphere->radius = 2;
 	rt->sphere->color->r = 0;
@@ -53,7 +53,7 @@ void	ft_ini_plane(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->plane->norm = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	if (!(rt->plane->color = (t_color*)malloc(sizeof(t_color))))
+	if (!(rt->plane->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	if (!(rt->plane->o = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
@@ -67,6 +67,9 @@ void	ft_ini_plane(t_rt *rt)
 	rt->plane->o->x = 0;
 	rt->plane->o->y = 0;
 	rt->plane->o->z = 0;
+	rt->plane->supp = (-1) * rt->plane->o->x * rt->plane->norm->x +
+	(-1) * rt->plane->o->y * rt->plane->norm->y +
+	(-1) * rt->plane->o->z * rt->plane->norm->z;
 }
 
 void	ft_ini_viewplane(t_rt *rt)
@@ -118,7 +121,7 @@ void	ft_ini_light(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->light->o = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	if (!(rt->light->color = (t_color*)malloc(sizeof(t_color))))
+	if (!(rt->light->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	rt->light->color->r = 1.0;
 	rt->light->color->g = 0.0;
@@ -140,13 +143,13 @@ void	ft_ini(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->sphere_ray = (t_ray*)malloc(sizeof(t_ray))))
 		ft_malloc_error();
-	if (!(rt->color = (t_color*)malloc(sizeof(t_color))))
+	if (!(rt->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	if (!(rt->icolor = (t_icolor*)malloc(sizeof(t_icolor))))
 		ft_malloc_error();
 	if (!(rt->inter = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	if (!(rt->zcolor = (t_color*)malloc(sizeof(t_color))))
+	if (!(rt->zcolor = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	rt->zcolor->r = 0.0;
 	rt->zcolor->g = 0.0;
