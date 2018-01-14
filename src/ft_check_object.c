@@ -37,11 +37,14 @@ void		ft_get_light(t_rt *rt)
 
 double				ft_check_plane(t_rt *rt)
 {
-	double		dst;
+	double		a;
+	double		b;
 
-	dst = ((scal(rt->plane->norm, rt->cam->pos) + rt->plane->supp)
-	/ (scal(rt->plane->norm, rt->ray->dir)));
-	return (dst);
+	b = scal(rt->plane->norm, rt->ray->dir);
+	if (b == 0)
+		return (-1);
+	a = scal(rt->plane->norm, rt->cam->pos) + rt->plane->supp;
+	return (-a / b);
 }
 
 double				ft_check_sphere(t_rt *rt)
