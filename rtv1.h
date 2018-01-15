@@ -29,13 +29,6 @@ typedef	struct 			s_material
 	double				b;
 }						t_material;
 
-typedef struct 			s_icolor
-{
-	int 				r;
-	int 				g;
-	int 				b;
-}						t_icolor;
-
 typedef	struct			s_coo
 {
 	double				x;
@@ -60,7 +53,6 @@ typedef struct 			s_cylinder
 	t_coo				*o;
 	double				radius;
 	t_material			*color;
-	double				height;
 }						t_cylinder;
 
 typedef	struct 			s_cone
@@ -68,7 +60,6 @@ typedef	struct 			s_cone
 	t_coo				*o;
 	double				radius;
 	t_material			*color;
-	double				height;
 	struct s_cone		*next;
 }						t_cone;
 
@@ -128,7 +119,6 @@ typedef	struct			s_rt
 	t_plane				*plane;
 	t_view				*view;
 	t_material			*color;
-	t_icolor			*icolor;
 	t_coo 				*inter;
 	double				dst;
 	t_ray				*light_ray;
@@ -143,23 +133,20 @@ void					ft_ini(t_rt *rt);
 
 int						my_key_press(int key, t_rt *rt);
 int						ft_exit_cross(t_rt *rt);
-void					put_pxl(t_data *data, int x, int y, t_icolor *color);
-
-void					ft_parser(char *path, t_rt *rt);
-void					ft_create_sphere(t_rt *rt, char **line);
+void					put_pxl(t_data *data, int x, int y, t_material *color);
 
 void					ft_raytracing(t_rt *rt);
 
 void					ft_check_object(t_rt *rt);
 
 t_coo					*ft_add_vect(t_coo *vect1, t_coo *vect2);
-double					scal(t_coo *vect1, t_coo *vect2);
+t_coo					*ft_div_vect(double i, t_coo *vect);
 t_coo					*ft_mult_vect(double i, t_coo *vect);
 t_coo					*ft_sub_vect(t_coo *vect1, t_coo *vect2);
-double					ft_norm(t_coo *point1, t_coo *point2);
-t_coo					*ft_div_vect(double i, t_coo *vect);
-double					ft_norm_2(t_coo *vect);
 
-void					zero_color(t_rt *rt);
+double					scal(t_coo *vect1, t_coo *vect2);
+double					ft_dst(t_coo *point1, t_coo *point2);
+double					ft_norme(t_coo *vect);
+t_coo					*ft_normalize(t_coo *vect);
 
 #endif

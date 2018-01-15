@@ -12,7 +12,19 @@
 
 #include "../rtv1.h"
 
-double		ft_norm_2(t_coo *vect)
+t_coo		*ft_normalize(t_coo *vect)
+{
+	double		norm;
+	t_coo		*new;
+
+	if (!(new = (t_coo*)malloc(sizeof(t_coo))))
+		ft_malloc_error();
+	norm = ft_norme(vect);
+	new = ft_div_vect(norm, vect);
+	return (new);
+}
+
+double		ft_norme(t_coo *vect)
 {
 	double	rslt;
 
@@ -34,7 +46,7 @@ t_coo		*ft_div_vect(double i, t_coo *vect)
 	return (new);
 }
 
-double		ft_norm(t_coo *vect1, t_coo *vect2)
+double		ft_dst(t_coo *vect1, t_coo *vect2)
 {
 	double		rslt;
 

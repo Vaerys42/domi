@@ -12,6 +12,12 @@
 
 #include "../rtv1.h"
 
+void		move_color(t_material *c, double r, double g, double b){
+	c->r = r;
+	c->g = g;
+	c->b = b;
+}
+
 void		ft_get_point(t_rt *rt)
 {
 	rt->inter = ft_mult_vect(rt->dst, rt->ray->dir);
@@ -23,9 +29,9 @@ void		ft_get_light(t_rt *rt)
 	double		angle;
 
 	rt->light_ray->o = ft_sub_vect(rt->light->o, rt->inter);
-	rt->light_ray->dir = ft_div_vect(ft_norm_2(rt->light_ray->o), rt->light_ray->o);
+	rt->light_ray->dir = ft_div_vect(ft_norme(rt->light_ray->o), rt->light_ray->o);
 	rt->angle_ray->o = ft_sub_vect(rt->inter, rt->sphere->o);
-	rt->angle_ray->dir = ft_div_vect(ft_norm_2(rt->angle_ray->o), rt->angle_ray->o);
+	rt->angle_ray->dir = ft_div_vect(ft_norme(rt->angle_ray->o), rt->angle_ray->o);
 	angle = scal(rt->light_ray->dir, rt->angle_ray->dir);
 
 	angle = (angle < 0.1) ? 0.1 : angle;
@@ -62,12 +68,12 @@ double				ft_check_sphere(t_sphere *sphere, t_ray *ray)
 	OH = scal(ray->dir, &sphere_ray);
 	if (OH >= 0)
 	{
-		CHCH = pow(ft_norm_2(&sphere_ray),2) - (OH * OH);
+		CHCH = pow(ft_norme(&sphere_ray),2) - (OH * OH);
 		RR = sphere->radius * sphere->radius;
 		if (CHCH <= RR)
 		{
-			ta = ft_norm(ray->dir, &sphere_ray) + sqrt(RR - CHCH);
-			tb = ft_norm(ray->dir, &sphere_ray) - sqrt(RR - CHCH);
+			ta = ft_dst(ray->dir, &sphere_ray) + sqrt(RR - CHCH);
+			tb = ft_dst(ray->dir, &sphere_ray) - sqrt(RR - CHCH);
 			if (ta >= tb)
 				return(tb);
 			return(ta);
@@ -80,14 +86,12 @@ void			ft_check_object(t_rt *rt)
 {
 	//double tmp;
 
-	/*if ((rt->dst = ft_check_sphere(rt->sphere, rt->ray)) > 0)
-		rt->color = rt->sphere->color;*/
-	rt->color->r = 0.0;
-	rt->color->g = 0.0;
-	rt->color->b = 0.0;
-	if ((rt->dst = ft_check_plane(rt->plane, rt->ray)) < 0){
+	move_color(rt->color, 0.0, 0.0, 0.0);
+	/*if ((rt->dst = ft_check_plane(rt->plane, rt->ray)) < 0){
 		rt->color = rt->plane->color;
-	}
+	}*/
+	if ((rt->dst = ft_check_sphere(rt->sphere, rt->ray)) > 0)
+		move_color(rt->color, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);	
 	if (rt->dst <= 0.01)
 		rt->dst = 0;
 	if (rt->dst != 0)
