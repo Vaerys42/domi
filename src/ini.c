@@ -38,13 +38,13 @@ void	ft_ini_sphere(t_rt *rt)
 	if (!(rt->sphere->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
 	rt->sphere->radius = 2;
-	rt->sphere->color->r = 0;
-	rt->sphere->color->g = 1;
+	rt->sphere->color->r = 1;
+	rt->sphere->color->g = 0;
 	rt->sphere->color->b = 0;
 	rt->sphere->next = NULL;
 	rt->sphere->o->x = 3;
 	rt->sphere->o->y = 2;
-	rt->sphere->o->z = 30.0;
+	rt->sphere->o->z = 20.0;
 }
 
 void	ft_ini_plane(t_rt *rt)
@@ -58,7 +58,7 @@ void	ft_ini_plane(t_rt *rt)
 	if (!(rt->plane->o = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	rt->plane->color->r = 0.0;
-	rt->plane->color->g = 0.1;
+	rt->plane->color->g = 0.5;
 	rt->plane->color->b = 0.0;
 	rt->plane->next = NULL;
 	rt->plane->norm->x = 0;
@@ -123,23 +123,25 @@ void	ft_ini_light(t_rt *rt)
 	rt->light->color->g = 1.0;
 	rt->light->color->b = 1.0;
 	rt->light->o->x = 0.0;
-	rt->light->o->y = 0.0;
-	rt->light->o->z = 25.0;
+	rt->light->o->y = 1.0;
+	rt->light->o->z = 15.0;
 	rt->light->power = 1.0;
 }
 
 void	ft_ini(t_rt *rt)
 {
 	ft_create(rt);
+	if (!(rt->inter = (t_inter*)malloc(sizeof(t_inter))))
+		ft_malloc_error();
 	if (!(rt->ray = (t_ray*)malloc(sizeof(t_ray))))
 		ft_malloc_error();
 	if (!(rt->light_ray = (t_ray*)malloc(sizeof(t_ray))))
 		ft_malloc_error();
-	if (!(rt->angle_ray = (t_ray*)malloc(sizeof(t_ray))))
+	if (!(rt->inter->angle = (t_ray*)malloc(sizeof(t_ray))))
 		ft_malloc_error();
-	if (!(rt->color = (t_material*)malloc(sizeof(t_material))))
+	if (!(rt->inter->mat = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
-	if (!(rt->inter = (t_coo*)malloc(sizeof(t_coo))))
+	if (!(rt->inter->point = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	ft_ini_cam(rt);
 	ft_ini_sphere(rt);

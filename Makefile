@@ -7,7 +7,9 @@ SRC =	src/main.c \
 		src/key.c \
 		src/vect.c \
 		src/raytracing.c \
-		src/ft_check_object.c
+		src/ft_check_object.c \
+		src/sphere.c \
+		src/plane.c 
 
 LIBS = -framework OpenGL -framework Appkit minilibx_macos/libmlx.a libft/libft.a
 

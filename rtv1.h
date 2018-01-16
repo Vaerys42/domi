@@ -109,6 +109,14 @@ typedef	struct 			s_view
 	t_coo				*up_left;
 }						t_view;
 
+typedef	struct 			s_inter
+{
+	double				dst;
+	t_material			*mat;
+	t_ray				*angle;
+	t_coo				*point;
+}						t_inter;
+
 typedef	struct			s_rt
 {
 	t_data				*data;
@@ -118,11 +126,8 @@ typedef	struct			s_rt
 	t_sphere			*sphere;
 	t_plane				*plane;
 	t_view				*view;
-	t_material			*color;
-	t_coo 				*inter;
-	double				dst;
 	t_ray				*light_ray;
-	t_ray				*angle_ray;
+	t_inter				*inter;
 }						t_rt;
 
 void					ft_malloc_error(void);
@@ -134,6 +139,7 @@ void					ft_ini(t_rt *rt);
 int						my_key_press(int key, t_rt *rt);
 int						ft_exit_cross(t_rt *rt);
 void					put_pxl(t_data *data, int x, int y, t_material *color);
+void					move_color(t_material *c, double r, double g, double b);
 
 void					ft_raytracing(t_rt *rt);
 
@@ -148,5 +154,11 @@ double					scal(t_coo *vect1, t_coo *vect2);
 double					ft_dst(t_coo *point1, t_coo *point2);
 double					ft_norme(t_coo *vect);
 t_coo					*ft_normalize(t_coo *vect);
+
+double					ft_check_sphere(t_sphere *sphere, t_ray *ray);
+void					check_sphere_inter(t_rt *rt);
+
+void					check_plane_inter(t_rt *rt);
+double					ft_check_plane(t_plane *plane, t_ray *ray);
 
 #endif

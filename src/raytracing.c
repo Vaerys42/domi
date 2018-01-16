@@ -28,24 +28,24 @@ void	put_pxl(t_data *data, int x, int y, t_material *color)
 
 void		ft_convert(t_rt *rt)
 {
-	if (rt->color->r > 1.0)
-		rt->color->r = 1.0;
-	if (rt->color->g > 1.0)
-		rt->color->g = 1.0;
-	if (rt->color->b > 1.0)
-		rt->color->b = 1.0;
-	rt->color->r = (int)(rt->color->r * 255);
-	rt->color->g = (int)(rt->color->g * 255);
-	rt->color->b = (int)(rt->color->b * 255);
+	if (rt->inter->mat->r > 1.0)
+		rt->inter->mat->r = 1.0;
+	if (rt->inter->mat->g > 1.0)
+		rt->inter->mat->g = 1.0;
+	if (rt->inter->mat->b > 1.0)
+		rt->inter->mat->b = 1.0;
+	rt->inter->mat->r = (int)(rt->inter->mat->r * 255);
+	rt->inter->mat->g = (int)(rt->inter->mat->g * 255);
+	rt->inter->mat->b = (int)(rt->inter->mat->b * 255);
 }
 
 void		ft_ray(t_rt *rt, int x, int y)
 {
 	ft_check_object(rt);
-	if (rt->color->r == 0 && rt->color->g == 0 && rt->color->b == 0)
+	if (rt->inter->mat->r == 0 && rt->inter->mat->g == 0 && rt->inter->mat->b == 0)
 		return ;
 	ft_convert(rt);
-	put_pxl(rt->data, x, y, rt->color);
+	put_pxl(rt->data, x, y, rt->inter->mat);
 }
 
 void		ft_ini_ray(t_rt *rt, int x, int y)
