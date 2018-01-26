@@ -21,7 +21,8 @@ char	*ft_strrev(char *str)
 
 	i = ft_strlen(str);
 	j = 0;
-	new = (char*)malloc(sizeof(char) * (i + 1));
+	if (!(new = (char*)malloc(sizeof(char) * (i + 1))))
+		ft_malloc_error();
 	while (j < (int)ft_strlen(str))
 	{
 		new[j] = str[i - 1];

@@ -21,8 +21,8 @@ char		*ft_strjoin_free(char *s1, char *s2, int mode)
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + ft_strlen(s2) + 1))) == NULL)
-		return (new);
+	if (!(new = (char*)malloc(sizeof(char) * (i + ft_strlen(s2) + 1))))
+		ft_malloc_error();
 	j = 0;
 	while (s1[j] != '\0')
 	{

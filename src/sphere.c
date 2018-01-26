@@ -30,29 +30,29 @@ double				ft_check_sphere(t_sphere *sphere, t_ray *ray)
 	return(0);
 }
 
-void			check_sphere_inter(t_rt *rt)
+void			check_sphere_inter(t_rt *rt, int type)
 {
 	double	tmp;
 
-	if (rt->sphere != NULL)
+	if (rt->start->sph != NULL)
 	{
-		tmp = ft_check_sphere(rt->sphere, rt->ray);
-		if (tmp < rt->inter->dst && tmp > 0)
+		rt->sphere = rt->start->sph;
+		while (rt->sphere != NULL)
 		{
-			rt->inter->dst = tmp;
-			move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
-			rt->inter->angle->o = ft_sub_vect(rt->inter->point, rt->sphere->o);
-			rt->inter->angle->dir = ft_normalize(rt->inter->angle->o);
-		}
-		while (rt->sphere->next != NULL)
-		{
-			tmp = ft_check_sphere(rt->sphere, rt->ray);
+			if (type == 0)
+				tmp = ft_check_sphere(rt->sphere, rt->ray);
+			else
+				tmp = ft_check_sphere(rt->sphere, rt->light_ray);
 			if (tmp < rt->inter->dst && tmp > 0)
 			{
 				rt->inter->dst = tmp;
-				move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
-				rt->inter->angle->o = ft_sub_vect(rt->inter->point, rt->sphere->o);
-				rt->inter->angle->dir = ft_normalize(rt->inter->angle->o);
+				rt->inter->obj = SPH;
+				if (type != 0)
+				{
+					move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
+					rt->inter->angle->o = ft_sub_vect(rt->inter->point, rt->sphere->o);
+					rt->inter->angle->dir = ft_normalize(rt->inter->angle->o);
+				}
 			}
 			rt->sphere = rt->sphere->next;
 		}

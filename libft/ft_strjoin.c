@@ -22,9 +22,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	if ((new = (char*)malloc(sizeof(char) * (ft_strlen(s1)
-	+ ft_strlen(s2) + 1))) == NULL)
-		return (new);
+	if (!(new = (char*)malloc(sizeof(char) * (ft_strlen(s1)
+	+ ft_strlen(s2) + 1))))
+		ft_malloc_error();
 	j = -1;
 	while (s1[++j] != '\0')
 		new[j] = s1[j];

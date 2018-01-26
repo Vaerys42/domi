@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "includes/libft.h"
 
 void	*ft_memalloc(size_t size)
 {
@@ -21,9 +20,8 @@ void	*ft_memalloc(size_t size)
 	i = 0;
 	if (size > 4294967295 || size == 0)
 		return (0);
-	new = (unsigned char*)malloc(sizeof(char) * (size + 1));
-	if (new == NULL)
-		return (NULL);
+	if (!(new = (unsigned char*)malloc(sizeof(char) * (size + 1))))
+		ft_malloc_error();
 	while (new[i] != '\0')
 	{
 		new[i] = '\0';

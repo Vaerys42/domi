@@ -27,8 +27,8 @@ char	*ft_short(char *str, int len)
 	char	*new;
 	int		i;
 
-	if ((new = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) == NULL)
-		return (new);
+	if (!(new = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
+		ft_malloc_error();
 	i = 0;
 	ft_bzero(new, BUFF_SIZE + 1);
 	while (len + i < BUFF_SIZE)

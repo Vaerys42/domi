@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "includes/libft.h"
 
 char	*ft_strnew(size_t size)
 {
@@ -19,9 +18,8 @@ char	*ft_strnew(size_t size)
 	int		i;
 
 	i = 0;
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (new == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char) * (size + 1))))
+		ft_malloc_error();
 	while (new[i] != '\0')
 	{
 		new[i] = '\0';

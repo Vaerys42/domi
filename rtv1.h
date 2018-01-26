@@ -18,6 +18,11 @@
 # define PLN_DST 1.0
 # define AMB_LIGHT 0.2
 
+# define SPH 1
+# define PLN 2
+# define CON 3
+# define CYL 4
+
 # include "libft/includes/libft.h"
 # include "minilibx_macos/mlx.h"
 # include "math.h"
@@ -58,7 +63,8 @@ typedef struct 			s_cylinder
 typedef	struct 			s_cone
 {
 	t_coo				*o;
-	double				radius;
+	t_coo				*dir;
+	double				angle;
 	t_material			*color;
 	struct s_cone		*next;
 }						t_cone;
@@ -115,7 +121,15 @@ typedef	struct 			s_inter
 	t_material			*mat;
 	t_ray				*angle;
 	t_coo				*point;
+	int 				obj;
 }						t_inter;
+
+typedef	struct 			s_start
+{
+	t_sphere			*sph;
+	t_plane				*pln;
+	t_cone				*con;
+}						t_start;
 
 typedef	struct			s_rt
 {
@@ -125,16 +139,28 @@ typedef	struct			s_rt
 	t_light				*light;
 	t_sphere			*sphere;
 	t_plane				*plane;
+	t_cone				*cone;
 	t_view				*view;
 	t_ray				*light_ray;
 	t_inter				*inter;
+	t_start				*start;
 }						t_rt;
 
 void					ft_malloc_error(void);
 void					ft_bad_arg(int i);
 void					ft_exit(void);
 
+void					ft_sphere_info(t_sphere *sphere);
+void					ft_plane_info(t_plane *plane);
+void					ft_cone_info(t_cone *cone);
+
 void					ft_ini(t_rt *rt);
+void					parser(t_rt *rt, char *file);
+int						ft_check_obj(char *str, int fd, t_rt *rt);
+
+t_coo					*get_coo(char **str, int err);
+t_material				*get_color(char **str);
+double					get_radius(char **str);
 
 int						my_key_press(int key, t_rt *rt);
 int						ft_exit_cross(t_rt *rt);
@@ -156,9 +182,17 @@ double					ft_norme(t_coo *vect);
 t_coo					*ft_normalize(t_coo *vect);
 
 double					ft_check_sphere(t_sphere *sphere, t_ray *ray);
-void					check_sphere_inter(t_rt *rt);
+void					check_sphere_inter(t_rt *rt, int type);
+void					ft_ini_sphere(t_rt *rt);
+int						ft_add_sphere(int fd, t_rt *rt);
 
-void					check_plane_inter(t_rt *rt);
+void					check_plane_inter(t_rt *rt, int type);
 double					ft_check_plane(t_plane *plane, t_ray *ray);
+void					ft_ini_plane(t_rt *rt);
+
+void					check_cone_inter(t_rt *rt, int type);
+double					ft_check_cone(t_cone *cone, t_ray *ray);
+
+void					ft_get_point(t_rt *rt);
 
 #endif

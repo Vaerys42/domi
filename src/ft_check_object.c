@@ -29,25 +29,27 @@ void		ft_get_light(t_rt *rt)
 {
 	double		angle;
 
+	rt->inter->dst = 9999;
+	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
 	rt->light_ray->o = ft_sub_vect(rt->light->o, rt->inter->point);
 	rt->light_ray->dir = ft_normalize(rt->light_ray->o);
-	angle = scal(rt->light_ray->dir, rt->inter->angle->dir);
-
+	check_sphere_inter(rt, 1);
+	check_plane_inter(rt, 1);
+	//check_cone_inter(rt, 1);
+	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
-
-	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r * angle * rt->light->power * 2;
-	rt->inter->mat->g = rt->inter->mat->g * rt->light->color->g * angle * rt->light->power * 2;
-	rt->inter->mat->b = rt->inter->mat->b * rt->light->color->b * angle * rt->light->power * 2;
+	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r * angle * rt->light->power;
+	rt->inter->mat->g = rt->inter->mat->g * rt->light->color->g * angle * rt->light->power;
+	rt->inter->mat->b = rt->inter->mat->b * rt->light->color->b * angle * rt->light->power;
 }
 
 void			ft_check_object(t_rt *rt)
 {
 	rt->inter->dst = 99999;
-	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
 	rt->inter->angle->dir = rt->ray->dir;
-	
-	check_sphere_inter(rt);
-	check_plane_inter(rt);
+	check_sphere_inter(rt, 0);
+	check_plane_inter(rt, 0);
+	//check_cone_inter(rt, 0);
 	if (rt->inter->dst <= 0.01)
 		rt->inter->dst = 0;
 	if (rt->inter->dst != 0)

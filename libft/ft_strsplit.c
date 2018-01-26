@@ -10,69 +10,67 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
 #include "includes/libft.h"
 
-static int	ft_words(const char *s, char c)
+static	int		ft_count_words(const char *str, char c)
 {
-	int		cnt;
-	int		i;
+	int	word;
+	int	i;
 
-	cnt = 0;
 	i = 0;
-	while (s[i] != '\0')
+	word = 0;
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		if (s[i] != c && s[i] != '\0')
-		{
-			while (s[i] != c && s[i] != '\0')
-				i++;
-			cnt++;
-		}
-	}
-	return (cnt);
-}
-
-static int	ft_size(const char *s, char c, int i)
-{
-	int		size;
-
-	size = 0;
-	while (s[i] != c)
-	{
-		size++;
+		if (str[i] == c && str[i + 1] != c)
+			word++;
 		i++;
 	}
-	return (size);
+	if (str[0] != '\0')
+		word++;
+	return (word);
 }
 
-char		**ft_strsplit(const char *s, char c)
+static	char	*ft_word(const char *str, char c, int *i)
 {
-	char	**new;
-	int		nb_words;
-	int		j;
-	int		i;
+	char	*s;
+	int		k;
 
-	j = 0;
-	i = 0;
-	if (s == NULL)
-		return (NULL);
-	nb_words = ft_words(s, c);
-	new = (char**)malloc(sizeof(char*) * (nb_words + 1));
-	if (new == NULL)
-		return (NULL);
-	while (nb_words)
+	if (!(s = (char *)malloc(sizeof(s) * (ft_strlen(str)))))
+		ft_malloc_error();
+	k = 0;
+	while (str[*i] != c && str[*i])
 	{
-		while (s[i] == c)
-			i++;
-		new[j] = ft_strsub(s, i, ft_size(s, c, i));
-		while (s[i] != c)
-			i++;
-		j++;
-		nb_words--;
+		s[k] = str[*i];
+		k++;
+		*i += 1;
 	}
-	new[j] = NULL;
-	return (new);
+	s[k] = '\0';
+	while (str[*i] == c && str[*i])
+		*i += 1;
+	return (s);
+}
+
+char			**ft_strsplit(const char *str, char c)
+{
+	int		i;
+	int		j;
+	int		wrd;
+	char	**s;
+
+	i = 0;
+	j = 0;
+	wrd = ft_count_words(str, c);
+	if (!(s = (char **)malloc(sizeof(s) * (ft_count_words(str, c) + 2))))
+		ft_malloc_error();
+	while (str[i] == c && str[i])
+		i++;
+	while (j < wrd && str[i])
+	{
+		s[j] = ft_word(str, c, &i);
+		j++;
+	}
+	s[j] = NULL;
+	return (s);
 }

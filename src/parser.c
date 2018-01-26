@@ -12,61 +12,30 @@
 
 #include "../rtv1.h"
 
-int				ft_line_in_file(int fd)
+void		ft_ini_struct(t_rt *rt)
 {
-	int			i;
-	char		*tmp;
-	int			ret;
-
-	i = 0;
-	while ((ret = get_next_line(fd, &tmp)) > 0)
-	{
-		free(tmp);
-		i++;
-	}
-	if (ret == -1)
-		ft_bad_arg(1);
-	free(tmp);
-	return (i);
-}
-
-char			**ft_get_file(char *path)
-{
-	int			fd;
-	int			ret;
-	int			line;
-	char		**file;
-
-	fd = open(path, O_RDONLY);
-	line = ft_line_in_file(fd);
-	if ((file = (char**)malloc(sizeof(char*) * line + 1)) == NULL)
+	if (!(rt->start = (t_start*)malloc(sizeof(t_start))))
 		ft_malloc_error();
-	close(fd);
-	fd = open(path, O_RDONLY);
-	line = 0;
-	while ((ret = get_next_line(fd, &(file[line]))) > 0)
-		line++;
-	file[line] = 0;
-	close(fd);
-	return (file);
+	rt->sphere = NULL;
+	rt->plane = NULL;
+	rt->cone = NULL;
+	rt->start->sph = NULL;
+	rt->start->pln = NULL;
+	rt->start->con = NULL;
 }
 
-void			ft_transfer(char *file, t_rt *rt)
+void		parser(t_rt *rt, char *file)
 {
-	char		**line;
+	int		fd;
+	char	*line;
+	int		ret;
 
-	line = ft_strsplit(file, ' ');
-	if (ft_strcmp(line[0], "sphere") == 0)
-		ft_create_sphere(rt, line);
-}
-
-void			ft_parser(char *path, t_rt *rt)
-{
-	char		**file;
-	int			i;
-
-	i = -1;
-	file = ft_get_file(path);
-	while (file[++i] != 0)
-		ft_transfer(file[i], rt);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		ft_bad_arg(1);
+	ft_ini_struct(rt);
+	while ((ret = get_next_line(fd, &line)) > 0)
+		ft_check_obj(line, fd, rt);
+	if (ret == -1)
+		ft_bad_arg(-1);
 }

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "includes/libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -23,9 +22,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	while (s[i] != '\0')
 		i++;
-	new = (char*)malloc(sizeof(char) * (i + 1));
-	if (new == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char) * (i + 1))))
+		ft_malloc_error();
 	i = 0;
 	while (s[i] != '\0')
 	{

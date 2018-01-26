@@ -37,8 +37,8 @@ static char		*ft_naze(void)
 {
 	char	*new;
 
-	if ((new = (char*)malloc(sizeof(char))) == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char))))
+		ft_malloc_error();
 	new[0] = '\0';
 	return (new);
 }
@@ -67,8 +67,8 @@ char			*ft_strtrim(const char *s)
 		return (ft_naze());
 	begin = ft_start(s);
 	j = ft_len(begin, i, j);
-	if ((new = (char*)malloc(sizeof(char) * (j + 1))) == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char) * (j + 1))))
+		ft_malloc_error();
 	j = 0;
 	while ((begin + j) != (i + 1))
 	{

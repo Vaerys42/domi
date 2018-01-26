@@ -19,12 +19,32 @@ void		window(t_rt *rt)
 	mlx_loop(rt->data->mlx);
 }
 
-int			main(void)
+void		ft_print(t_rt *rt)
+{
+	if (rt->start->con != NULL)
+	{
+		rt->cone = rt->start->con;
+		while (rt->cone != NULL)
+		{
+			printf("cone: \n");
+			printf("coo %f %f %f\n", rt->cone->o->x, rt->cone->o->y, rt->cone->o->z);
+			printf("color %f %f %f\n", rt->cone->color->r, rt->cone->color->g, rt->cone->color->b);
+			printf("angle %f\n", rt->cone->angle);
+			rt->cone = rt->cone->next;
+		}
+	}
+}
+
+int			main(int argc, char **argv)
 {
 	t_rt		*rt;
 
+	if (argc != 2)
+		ft_bad_arg(0);
 	if (!(rt = (t_rt*)malloc(sizeof(t_rt))))
 		ft_malloc_error();
+	parser(rt, argv[1]);
+	//ft_print(rt);
 	ft_ini(rt);
 	ft_raytracing(rt);
 	window(rt);

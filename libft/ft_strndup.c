@@ -19,9 +19,8 @@ char	*ft_strndup(char *str, int size, int start)
 	int		i;
 
 	i = 0;
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (new == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char) * (size + 1))))
+		ft_malloc_error();
 	while (i < size)
 	{
 		new[i] = str[start + i];

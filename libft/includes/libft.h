@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h>
+# include <math.h>
 
 # define BUFF_SIZE 1
 
@@ -82,6 +82,7 @@ int				ft_recursive_factorial(int nb);
 char			*ft_strndup(char *str, int size, int start);
 char			*ft_strnjoin(char *s1, char *s2, const int size);
 char			*ft_strjoin_free(char *s1, char *s2, int mode);
+double			ft_atodouble(char *str);
 
 typedef struct	s_list
 {
@@ -98,5 +99,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int				get_next_line(const int fd, char **line);
+
+void			ft_malloc_error(void);
 
 #endif

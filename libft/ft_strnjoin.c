@@ -22,8 +22,8 @@ char	*ft_strnjoin(char *s1, char *s2, int size)
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	i = ft_strlen(s1);
-	if ((new = (char*)malloc(sizeof(char) * (i + size + 1))) == NULL)
-		return (new);
+	if (!(new = (char*)malloc(sizeof(char) * (i + size + 1))))
+		ft_malloc_error();
 	j = -1;
 	while (s1[++j] != 0)
 		new[j] = s1[j];

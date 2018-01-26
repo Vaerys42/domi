@@ -13,27 +13,28 @@ double				ft_check_plane(t_plane *plane, t_ray *ray)
 	return (-a / b);
 }
 
-void				check_plane_inter(t_rt *rt)
+void				check_plane_inter(t_rt *rt, int type)
 {
 	double		tmp;
 
-	if (rt->plane != NULL)
+	if (rt->start->pln != NULL)
 	{
-		tmp = ft_check_plane(rt->plane, rt->ray);
-		if (tmp > 0 && tmp < rt->inter->dst)
+		rt->plane = rt->start->pln;
+		while (rt->plane != NULL)
 		{
-			rt->inter->dst = tmp;
-			move_color(rt->inter->mat, rt->plane->color->r, rt->plane->color->g, rt->plane->color->b);
-			rt->inter->angle->dir = rt->plane->norm;
-		}
-		while (rt->plane->next != NULL)
-		{
-			tmp = ft_check_plane(rt->plane, rt->ray);
+			if (type == 0)
+				tmp = ft_check_plane(rt->plane, rt->ray);
+			else 
+				tmp = ft_check_plane(rt->plane, rt->light_ray);
 			if (tmp > 0 && tmp < rt->inter->dst)
 			{
 				rt->inter->dst = tmp;
-				move_color(rt->inter->mat, rt->plane->color->r, rt->plane->color->g, rt->plane->color->b);
-				rt->inter->angle->dir = rt->plane->norm;
+				rt->inter->obj = PLN;
+				if (type != 0)
+				{
+					move_color(rt->inter->mat, rt->plane->color->r, rt->plane->color->g, rt->plane->color->b);
+					rt->inter->angle->dir = rt->plane->norm;
+				}
 			}
 			rt->plane = rt->plane->next;
 		}

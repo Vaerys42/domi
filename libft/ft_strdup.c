@@ -20,8 +20,8 @@ char	*ft_strdup(const char *src)
 	int		i;
 
 	i = -1;
-	if ((new = (char*)malloc(sizeof(char) * (ft_strlen(src) + 1))) == NULL)
-		return (NULL);
+	if (!(new = (char*)malloc(sizeof(char) * (ft_strlen(src) + 1))))
+		ft_malloc_error();
 	while (src[++i] != '\0')
 		new[i] = src[i];
 	new[i] = '\0';

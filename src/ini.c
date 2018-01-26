@@ -29,49 +29,6 @@ void	ft_create(t_rt *rt)
 	rt->data->image_int = (int*)rt->data->image_string;
 }
 
-void	ft_ini_sphere(t_rt *rt)
-{
-	if (!(rt->sphere = (t_sphere*)malloc(sizeof(t_sphere))))
-		ft_malloc_error();
-	if (!(rt->sphere->o = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	if (!(rt->sphere->color = (t_material*)malloc(sizeof(t_material))))
-		ft_malloc_error();
-	rt->sphere->radius = 2;
-	rt->sphere->color->r = 1;
-	rt->sphere->color->g = 0;
-	rt->sphere->color->b = 0;
-	rt->sphere->next = NULL;
-	rt->sphere->o->x = 3;
-	rt->sphere->o->y = 2;
-	rt->sphere->o->z = 20.0;
-}
-
-void	ft_ini_plane(t_rt *rt)
-{
-	if (!(rt->plane = (t_plane*)malloc(sizeof(t_plane))))
-		ft_malloc_error();
-	if (!(rt->plane->norm = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	if (!(rt->plane->color = (t_material*)malloc(sizeof(t_material))))
-		ft_malloc_error();
-	if (!(rt->plane->o = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	rt->plane->color->r = 0.0;
-	rt->plane->color->g = 0.5;
-	rt->plane->color->b = 0.0;
-	rt->plane->next = NULL;
-	rt->plane->norm->x = 0;
-	rt->plane->norm->y = 1;
-	rt->plane->norm->z = 0;
-	rt->plane->o->x = 0;
-	rt->plane->o->y = 0;
-	rt->plane->o->z = 0;
-	rt->plane->supp = (-1) * rt->plane->o->x * rt->plane->norm->x +
-	(-1) * rt->plane->o->y * rt->plane->norm->y +
-	(-1) * rt->plane->o->z * rt->plane->norm->z;
-}
-
 void	ft_ini_viewplane(t_rt *rt)
 {
 	if (!(rt->view = (t_view*)malloc(sizeof(t_view))))
@@ -124,7 +81,7 @@ void	ft_ini_light(t_rt *rt)
 	rt->light->color->b = 1.0;
 	rt->light->o->x = 0.0;
 	rt->light->o->y = 1.0;
-	rt->light->o->z = 15.0;
+	rt->light->o->z = 11.0;
 	rt->light->power = 1.0;
 }
 
@@ -144,8 +101,21 @@ void	ft_ini(t_rt *rt)
 	if (!(rt->inter->point = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	ft_ini_cam(rt);
-	ft_ini_sphere(rt);
-	ft_ini_plane(rt);
 	ft_ini_light(rt);
 	rt->ray->o = rt->cam->pos;
+	rt->plane = rt->start->pln;
+	rt->inter->obj = -1;
+	while (rt->plane != NULL)
+	{
+		rt->plane->supp = (-1) * rt->plane->o->x * rt->plane->norm->x +
+		(-1) * rt->plane->o->y * rt->plane->norm->y +
+		(-1) * rt->plane->o->z * rt->plane->norm->z;
+		rt->plane = rt->plane->next;
+	}
+	rt->cone = rt->start->con;
+	while (rt->cone != NULL)
+	{
+		rt->cone->angle = (rt->cone->angle * M_PI) / 180;
+		rt->cone = rt->cone->next;
+	}
 }

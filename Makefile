@@ -3,13 +3,17 @@ NAME = "RTV1"
 SRC =	src/main.c \
 		src/ini.c \
 		src/error.c \
-		src/create_object.c \
 		src/key.c \
 		src/vect.c \
 		src/raytracing.c \
 		src/ft_check_object.c \
 		src/sphere.c \
-		src/plane.c 
+		src/plane.c \
+		src/parser.c \
+		src/get_data.c \
+		src/add_object.c \
+		src/parser_error.c \
+		src/cone.c \
 
 LIBS = -framework OpenGL -framework Appkit minilibx_macos/libmlx.a libft/libft.a
 
