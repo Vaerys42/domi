@@ -31,8 +31,8 @@ void		ft_get_light(t_rt *rt)
 
 	rt->inter->dst = 9999;
 	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
-	rt->light_ray->o = ft_sub_vect(rt->light->o, rt->inter->point);
-	rt->light_ray->dir = ft_normalize(rt->light_ray->o);
+	rt->light_ray->o = rt->light->o;
+	rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point, rt->light->o));
 	check_sphere_inter(rt, 1);
 	check_plane_inter(rt, 1);
 	//check_cone_inter(rt, 1);
