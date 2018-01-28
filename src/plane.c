@@ -24,13 +24,14 @@ void				check_plane_inter(t_rt *rt, int type)
 		{
 			if (type == 0)
 				tmp = ft_check_plane(rt->plane, rt->ray);
-			else 
+			else
 				tmp = ft_check_plane(rt->plane, rt->light_ray);
 			if (tmp > 0 && tmp < rt->inter->dst)
 			{
 				rt->inter->dst = tmp;
-				rt->inter->obj = PLN;
-				if (type != 0)
+				if (type == 0)
+					rt->inter->obj = PLN;
+				if (type != 0 && rt->inter->obj == PLN)
 				{
 					move_color(rt->inter->mat, rt->plane->color->r, rt->plane->color->g, rt->plane->color->b);
 					rt->inter->angle->dir = rt->plane->norm;

@@ -29,13 +29,13 @@ void		ft_get_light(t_rt *rt)
 {
 	double		angle;
 
-	rt->inter->dst = 9999;
+	rt->inter->dst = 99999;
 	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
 	rt->light_ray->o = rt->light->o;
 	rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point, rt->light->o));
 	check_sphere_inter(rt, 1);
 	check_plane_inter(rt, 1);
-	//check_cone_inter(rt, 1);
+
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
 	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r * angle * rt->light->power;

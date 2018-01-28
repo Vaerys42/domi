@@ -31,7 +31,7 @@ void			check_cone_inter(t_rt *rt, int type)
 		while (rt->cone != NULL)
 		{
 			if (type == 0)
-				tmp = ft_check_cone(rt->cone, rt->light_ray);
+				tmp = ft_check_cone(rt->cone, rt->ray);
 			else
 				tmp = ft_check_cone(rt->cone, rt->light_ray);
 			if (tmp < rt->inter->dst && tmp > 0)
@@ -39,7 +39,10 @@ void			check_cone_inter(t_rt *rt, int type)
 				rt->inter->dst = tmp;
 				rt->inter->obj = CON;
 				if (type != 0)
+				{
 					move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
+					rt->inter->angle->dir = rt->ray->dir;
+				}
 			}
 			rt->cone = rt->cone->next;
 		}

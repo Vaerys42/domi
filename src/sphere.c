@@ -46,8 +46,9 @@ void			check_sphere_inter(t_rt *rt, int type)
 			if (tmp < rt->inter->dst && tmp > 0)
 			{
 				rt->inter->dst = tmp;
-				rt->inter->obj = SPH;
-				if (type == 1)
+				if (type == 0)
+					rt->inter->obj = SPH;
+				if (type == 1 && rt->inter->obj == SPH)
 				{
 					move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
 					rt->inter->angle->o = ft_sub_vect(rt->inter->point, rt->sphere->o);
