@@ -11,9 +11,11 @@ SRC =	src/main.c \
 		src/plane.c \
 		src/parser.c \
 		src/get_data.c \
-		src/add_object.c \
-		src/parser_error.c \
 		src/cone.c \
+		src/sphere_p.c \
+		src/plane_p.c \
+		src/cone_p.c \
+		src/cylinder_p.c \
 
 LIBS = -framework OpenGL -framework Appkit minilibx_macos/libmlx.a libft/libft.a
 

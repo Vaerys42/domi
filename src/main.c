@@ -27,8 +27,10 @@ void		ft_print(t_rt *rt)
 		while (rt->cone != NULL)
 		{
 			printf("cone: \n");
-			printf("coo %f %f %f\n", rt->cone->o->x, rt->cone->o->y, rt->cone->o->z);
-			printf("color %f %f %f\n", rt->cone->color->r, rt->cone->color->g, rt->cone->color->b);
+			printf("coo %f %f %f\n", rt->cone->o->x, rt->cone->o->y,
+			rt->cone->o->z);
+			printf("color %f %f %f\n", rt->cone->color->r,
+			rt->cone->color->g, rt->cone->color->b);
 			printf("angle %f\n", rt->cone->angle);
 			rt->cone = rt->cone->next;
 		}
@@ -44,7 +46,6 @@ int			main(int argc, char **argv)
 	if (!(rt = (t_rt*)malloc(sizeof(t_rt))))
 		ft_malloc_error();
 	parser(rt, argv[1]);
-	//ft_print(rt);
 	ft_ini(rt);
 	ft_raytracing(rt);
 	window(rt);

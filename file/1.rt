@@ -10,3 +10,7 @@ plane
 coo: 0 0 0
 color: 1 0 0
 norm: 0 1 0
+cylinder
+coo: 15 15 15
+color: 0 1 1
+radius: 1

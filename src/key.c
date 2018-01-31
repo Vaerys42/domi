@@ -22,7 +22,7 @@ int			my_key_press(int key, t_rt *rt)
 	return (0);
 }
 
-int		ft_exit_cross(t_rt *rt)
+int			ft_exit_cross(t_rt *rt)
 {
 	mlx_destroy_image(rt->data->mlx, rt->data->mlx_image);
 	exit(EXIT_SUCCESS);

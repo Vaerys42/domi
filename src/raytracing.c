@@ -12,7 +12,7 @@
 
 #include "../rtv1.h"
 
-void	put_pxl(t_data *data, int x, int y, t_material *color)
+void		put_pxl(t_data *data, int x, int y, t_material *color)
 {
 	int		i;
 
@@ -42,7 +42,8 @@ void		ft_convert(t_rt *rt)
 void		ft_ray(t_rt *rt, int x, int y)
 {
 	ft_check_object(rt);
-	if (rt->inter->mat->r == 0 && rt->inter->mat->g == 0 && rt->inter->mat->b == 0)
+	if (rt->inter->mat->r == 0 && rt->inter->mat->g
+	== 0 && rt->inter->mat->b == 0)
 		return ;
 	ft_convert(rt);
 	put_pxl(rt->data, x, y, rt->inter->mat);
@@ -50,9 +51,9 @@ void		ft_ray(t_rt *rt, int x, int y)
 
 void		ft_ini_ray(t_rt *rt, int x, int y)
 {
-	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left, ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)), ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
-	//rt->ray->dir = ft_sub_vect(rt->ray->o, rt->cam->pos);
-	//rt->ray->dir = ft_sub_vect(rt->ray->dir, rt->cam->pos);
+	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left,
+	ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)),
+	ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
 	rt->ray->dir = ft_div_vect(ft_norme(rt->ray->dir), rt->ray->dir);
 }
 
@@ -71,5 +72,6 @@ void		ft_raytracing(t_rt *rt)
 			ft_ray(rt, x, y);
 		}
 	}
-	mlx_put_image_to_window(rt->data->mlx, rt->data->mlx_window, rt->data->mlx_image, 0, 0);
+	mlx_put_image_to_window(rt->data->mlx, rt->data->mlx_window,
+	rt->data->mlx_image, 0, 0);
 }

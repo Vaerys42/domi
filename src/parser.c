@@ -12,6 +12,24 @@
 
 #include "../rtv1.h"
 
+int			ft_check_obj(char *str, int fd, t_rt *rt)
+{
+	if (ft_strcmp(str, "plane") == 0)
+		return (ft_add_plane(fd, rt));
+	else if (ft_strcmp(str, "sphere") == 0)
+		return (ft_add_sphere(fd, rt));
+	else if (ft_strcmp(str, "cone") == 0)
+		return (ft_add_cone(fd, rt));
+	else if (ft_strcmp(str, "cylinder") == 0)
+		return (ft_add_cylinder(fd, rt));
+	else
+	{
+		printf("%s\n", str);
+		return (0);
+	}
+	return (0);
+}
+
 void		ft_ini_struct(t_rt *rt)
 {
 	if (!(rt->start = (t_start*)malloc(sizeof(t_start))))
@@ -19,9 +37,11 @@ void		ft_ini_struct(t_rt *rt)
 	rt->sphere = NULL;
 	rt->plane = NULL;
 	rt->cone = NULL;
+	rt->cylinder = NULL;
 	rt->start->sph = NULL;
 	rt->start->pln = NULL;
 	rt->start->con = NULL;
+	rt->start->cyl = NULL;
 }
 
 void		parser(t_rt *rt, char *file)

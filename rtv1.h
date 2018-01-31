@@ -27,7 +27,7 @@
 # include "minilibx_macos/mlx.h"
 # include "math.h"
 
-typedef	struct 			s_material
+typedef	struct			s_material
 {
 	double				r;
 	double				g;
@@ -46,21 +46,22 @@ typedef	struct			s_data
 	void				*mlx;
 	void				*mlx_window;
 	void				*mlx_image;
-	char 				*image_string;
+	char				*image_string;
 	int					s_l;
 	int					bpp;
 	int					endian;
 	int					*image_int;
 }						t_data;
 
-typedef struct 			s_cylinder
+typedef struct			s_cylinder
 {
 	t_coo				*o;
 	double				radius;
 	t_material			*color;
+	struct s_cylinder	*next;
 }						t_cylinder;
 
-typedef	struct 			s_cone
+typedef	struct			s_cone
 {
 	t_coo				*o;
 	t_coo				*dir;
@@ -69,7 +70,7 @@ typedef	struct 			s_cone
 	struct s_cone		*next;
 }						t_cone;
 
-typedef	struct 			s_sphere
+typedef	struct			s_sphere
 {
 	t_coo				*o;
 	double				radius;
@@ -77,29 +78,29 @@ typedef	struct 			s_sphere
 	struct s_sphere		*next;
 }						t_sphere;
 
-typedef	struct 			s_plane
+typedef	struct			s_plane
 {
 	t_material			*color;
 	t_coo				*norm;
-	t_coo 				*o;
+	t_coo				*o;
 	double				supp;
 	struct s_plane		*next;
 }						t_plane;
 
-typedef struct 			s_light
+typedef struct			s_light
 {
-	t_coo 				*o;
-	t_material 			*color;
+	t_coo				*o;
+	t_material			*color;
 	double				power;
 }						t_light;
 
-typedef	struct 			s_ray
+typedef	struct			s_ray
 {
 	t_coo				*o;
 	t_coo				*dir;
 }						t_ray;
 
-typedef	struct 			s_cam
+typedef	struct			s_cam
 {
 	t_coo				*pos;
 	t_coo				*forw;
@@ -107,28 +108,29 @@ typedef	struct 			s_cam
 	t_coo				*right;
 }						t_cam;
 
-typedef	struct 			s_view
+typedef	struct			s_view
 {
-	double 				screen_ratio;
+	double				screen_ratio;
 	double				height;
 	double				length;
 	t_coo				*up_left;
 }						t_view;
 
-typedef	struct 			s_inter
+typedef	struct			s_inter
 {
 	double				dst;
 	t_material			*mat;
 	t_ray				*angle;
 	t_coo				*point;
-	int 				obj;
+	int					obj;
 }						t_inter;
 
-typedef	struct 			s_start
+typedef	struct			s_start
 {
 	t_sphere			*sph;
 	t_plane				*pln;
 	t_cone				*con;
+	t_cylinder			*cyl;
 }						t_start;
 
 typedef	struct			s_rt
@@ -140,6 +142,7 @@ typedef	struct			s_rt
 	t_sphere			*sphere;
 	t_plane				*plane;
 	t_cone				*cone;
+	t_cylinder			*cylinder;
 	t_view				*view;
 	t_ray				*light_ray;
 	t_inter				*inter;
@@ -192,6 +195,10 @@ void					ft_ini_plane(t_rt *rt);
 
 void					check_cone_inter(t_rt *rt, int type);
 double					ft_check_cone(t_cone *cone, t_ray *ray);
+int						ft_add_cone(int fd, t_rt *rt);
+int						ft_add_plane(int fd, t_rt *rt);
+
+int						ft_add_cylinder(int fd, t_rt *rt);
 
 void					ft_get_point(t_rt *rt);
 

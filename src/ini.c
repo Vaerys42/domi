@@ -16,15 +16,19 @@ void	ft_create(t_rt *rt)
 {
 	if (!(rt->data = (t_data*)malloc(sizeof(t_data))))
 		ft_malloc_error();
-	if (!(rt->data->image_int = (int*)malloc(sizeof(int) * WIN_LEN * WIN_HEIGHT)))
+	if (!(rt->data->image_int = (int*)malloc(sizeof(int)
+	* WIN_LEN * WIN_HEIGHT)))
 		ft_malloc_error();
 	if (!(rt->data->mlx = mlx_init()))
 		ft_exit();
-	if (!(rt->data->mlx_window = mlx_new_window(rt->data->mlx, WIN_LEN, WIN_HEIGHT, "RTV1")))
+	if (!(rt->data->mlx_window = mlx_new_window(rt->data->mlx,
+	WIN_LEN, WIN_HEIGHT, "RTV1")))
 		ft_exit();
-	if (!(rt->data->mlx_image = mlx_new_image(rt->data->mlx, WIN_LEN, WIN_HEIGHT)))
+	if (!(rt->data->mlx_image = mlx_new_image(rt->data->mlx,
+	WIN_LEN, WIN_HEIGHT)))
 		ft_exit();
-	if (!(rt->data->image_string = mlx_get_data_addr(rt->data->mlx_image, &rt->data->bpp, &rt->data->s_l, &rt->data->endian)))
+	if (!(rt->data->image_string = mlx_get_data_addr(rt->data->mlx_image,
+	&rt->data->bpp, &rt->data->s_l, &rt->data->endian)))
 		ft_exit();
 	rt->data->image_int = (int*)rt->data->image_string;
 }
@@ -39,9 +43,9 @@ void	ft_ini_viewplane(t_rt *rt)
 	rt->cam->pos->y = rt->view->height / 2;
 	rt->cam->pos->z = 0;
 	rt->view->up_left =
-	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(rt->view->height
-	/ 2, rt->cam->up), ft_mult_vect(rt->view->length / 2, rt->cam->right)));
-
+	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(
+	rt->view->height / 2, rt->cam->up), 
+	ft_mult_vect(rt->view->length / 2, rt->cam->right)));
 }
 
 void	ft_ini_cam(t_rt *rt)
@@ -85,7 +89,7 @@ void	ft_ini_light(t_rt *rt)
 	rt->light->power = 1.0;
 }
 
-void	ft_ini(t_rt *rt)
+void	ft_malloc_ini(t_rt *rt)
 {
 	ft_create(rt);
 	if (!(rt->inter = (t_inter*)malloc(sizeof(t_inter))))
@@ -100,6 +104,11 @@ void	ft_ini(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->inter->point = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
+}
+
+void	ft_ini(t_rt *rt)
+{
+	ft_malloc_ini(rt);
 	ft_ini_cam(rt);
 	ft_ini_light(rt);
 	rt->ray->o = rt->cam->pos;
