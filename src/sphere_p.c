@@ -12,7 +12,7 @@
 
 #include "../rtv1.h"
 
-void				ft_sphere_info(t_sphere *sphere)
+void		ft_sphere_info(t_sphere *sphere)
 {
 	if (sphere->o == NULL)
 		ft_putstr("Needs origin coordinate for sphere. Ex : coo: 1 2 5\n");

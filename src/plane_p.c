@@ -12,7 +12,7 @@
 
 #include "../rtv1.h"
 
-void				ft_plane_info(t_plane *plane)
+void		ft_plane_info(t_plane *plane)
 {
 	if (plane->o == NULL)
 		ft_putstr("Needs origin coordinate for plane. Ex : coo: 1 2 5\n");

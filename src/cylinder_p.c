@@ -12,7 +12,7 @@
 
 #include "../rtv1.h"
 
-void				ft_cylinder_info(t_cylinder *cylinder)
+void		ft_cylinder_info(t_cylinder *cylinder)
 {
 	if (cylinder->o == NULL)
 		ft_putstr("Needs origin coordinate for cylinder. Ex : coo: 1 2 5\n");
