@@ -30,9 +30,9 @@ t_coo		*get_coo(char **str, int err)
 		ft_bad_arg(err);
 	if (!(coo = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
-	coo->x = ft_atodouble(str[1]);
-	coo->y = ft_atodouble(str[2]);
-	coo->z = ft_atodouble(str[3]);
+	coo->x = ft_atof(str[1]);
+	coo->y = ft_atof(str[2]);
+	coo->z = ft_atof(str[3]);
 	return (coo);
 }
 
@@ -44,9 +44,9 @@ t_material	*get_color(char **str)
 		ft_bad_arg(3);
 	if (!(color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
-	color->r = ft_atodouble(str[1]);
-	color->g = ft_atodouble(str[2]);
-	color->b = ft_atodouble(str[3]);
+	color->r = ft_atof(str[1]);
+	color->g = ft_atof(str[2]);
+	color->b = ft_atof(str[3]);
 	if (color->r < 0 || color->g < 0 || color->b < 0)
 	{
 		ft_putstr("Please use valid colors.\n");
@@ -67,7 +67,7 @@ double		get_radius(char **str)
 
 	if (tab_len(str) != 2)
 		ft_bad_arg(4);
-	radius = ft_atodouble(str[1]);
+	radius = ft_atof(str[1]);
 	if (radius < 0)
 	{
 		ft_putstr("Please use valid radius\n");

@@ -82,7 +82,7 @@ int				ft_recursive_factorial(int nb);
 char			*ft_strndup(char *str, int size, int start);
 char			*ft_strnjoin(char *s1, char *s2, const int size);
 char			*ft_strjoin_free(char *s1, char *s2, int mode);
-double			ft_atodouble(char *str);
+float			ft_atof(const char *str);
 
 typedef struct	s_list
 {

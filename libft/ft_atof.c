@@ -12,22 +12,31 @@
 
 #include "includes/libft.h"
 
-double	ft_atodouble(char *str)
+float		ft_atof(const char *str)
 {
-	double	res;
-	double	res2;
-	char	*c;
-	int		len;
+	float	n;
+	int		i;
+	int		k;
+	int		signe;
 
-	c = (char *)str;
-	res = (double)ft_atoi(c);
-	while (*c && *c != '.')
-		c++;
-	if (*c == '.')
-		c++;
-	res2 = (double)ft_atoi(c);
-	len = ft_strlen(c);
-	while (len--)
-		res2 /= 10;
-	return (res + ((res > 0) ? res2 : -res2));
+	i = 0;
+	n = 0;
+	k = 0;
+	signe = 1;
+	if (!str)
+		return (0);
+	while (str[i] == ' ' || str[i] == '\v' || str[i] == '\t' || str[i] == '\r'
+			|| str[i] == '\f' || str[i] == '\n')
+		i++;
+	signe = (str[i] == '-') ? -signe : signe;
+	i = (str[i] == '-' || str[i] == '+') ? i + 1 : i;
+	while (str[i] > 47 && str[i] < 58)
+	{
+		n = n * 10 + (str[i++] - 48);
+		if (str[i] == '.')
+			k = i++;
+	}
+	while (k != 0 && str[++k])
+		signe = signe * 10;
+	return (n / signe);
 }
