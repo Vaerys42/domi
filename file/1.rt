@@ -6,4 +6,4 @@ cone
 coo: 1 1 10
 color: 0 1 1
 angle: 10
-dir: 0 -1 0
+dir: 0 1 0

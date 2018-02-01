@@ -27,9 +27,9 @@ double			ft_check_cone(t_cone *cone, t_ray *ray)
 	det = (b * b) - (4 * a * c);
 	if (det < 0)
 		return (0);
-	if ((-b - sqrt(det) / 2 * a) > (-b + sqrt(det) / (2 * a)))
+	if ((-b - sqrt(det) / (2 * a)) > (-b + sqrt(det) / (2 * a)) && (-b + sqrt(det) / (2 * a)) > 0)
 		return (-b + sqrt(det) / (2 * a));
-	return (-b - sqrt(det) / 2 * a);
+	return (-b - sqrt(det) / (2 * a));
 }
 
 void			check_cone_inter(t_rt *rt, int type)
@@ -52,12 +52,12 @@ void			check_cone_inter(t_rt *rt, int type)
 					rt->inter->obj = CON;
 				if (type == 1 && rt->inter->obj == CON)
 				{
-					move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
-					rt->inter->angle->dir = rt->ray->dir;
+					move_color(rt->inter->mat, rt->cone->color->r, rt->cone->color->g, rt->cone->color->b);
+					/*rt->inter->angle->dir = rt->ray->dir;
 					rt->inter->angle->dir->x = rt->inter->point->x - rt->cone->o->x;
           			rt->inter->angle->dir->y = rt->inter->point->y;
          			rt->inter->angle->dir->z = rt->inter->point->z - rt->cone->o->z;
-         			rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);
+         			rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);*/
 				}
 			}
 			rt->cone = rt->cone->next;
