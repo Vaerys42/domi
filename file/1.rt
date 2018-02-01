@@ -1,16 +1,9 @@
-sphere
-coo: 0 1 20
-color: 0 1 0
-radius: 1
-sphere
-coo: 2 1 13
-color: 0 0 1
-radius: 1
 plane
 coo: 0 0 0
 color: 1 0 0
 norm: 0 1 0
-cylinder
-coo: 15 15 15
+cone
+coo: 1 1 10
 color: 0 1 1
-radius: 1
+angle: 10
+dir: 0 -1 0

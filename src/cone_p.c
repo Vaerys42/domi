@@ -21,7 +21,7 @@ void		ft_cone_info(t_cone *cone)
 	else if (cone->angle < 0)
 		ft_putstr("Needs angle for cone. Ex angle: 30\n");
 	else if (cone->dir == NULL)
-		ft_putstr("Needs dir for cone. Ex dir: 0 -1 0");
+		ft_putstr("Needs dir for cone. Ex dir: 0 -1 0\n");
 	else
 		return ;
 	exit(-1);

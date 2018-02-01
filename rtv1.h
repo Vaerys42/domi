@@ -158,6 +158,7 @@ void					ft_plane_info(t_plane *plane);
 void					ft_cone_info(t_cone *cone);
 
 void					ft_ini(t_rt *rt);
+void					ft_create(t_rt *rt);
 void					parser(t_rt *rt, char *file);
 int						ft_check_obj(char *str, int fd, t_rt *rt);
 

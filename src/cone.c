@@ -48,11 +48,16 @@ void			check_cone_inter(t_rt *rt, int type)
 			if (tmp < rt->inter->dst && tmp > 0)
 			{
 				rt->inter->dst = tmp;
-				rt->inter->obj = CON;
-				if (type != 0)
+				if (type == 0)
+					rt->inter->obj = CON;
+				if (type == 1 && rt->inter->obj == CON)
 				{
 					move_color(rt->inter->mat, rt->sphere->color->r, rt->sphere->color->g, rt->sphere->color->b);
 					rt->inter->angle->dir = rt->ray->dir;
+					rt->inter->angle->dir->x = rt->inter->point->x - rt->cone->o->x;
+          			rt->inter->angle->dir->y = rt->inter->point->y;
+         			rt->inter->angle->dir->z = rt->inter->point->z - rt->cone->o->z;
+         			rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);
 				}
 			}
 			rt->cone = rt->cone->next;
