@@ -66,6 +66,8 @@ int			ft_add_sphere(int fd, t_rt *rt)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
+		if (datas[0] == 0)
+			ret++;
 		if (ft_strcmp(datas[0], "coo:") == 0)
 			sphere->o = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "color:") == 0)

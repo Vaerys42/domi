@@ -69,7 +69,9 @@ int			ft_add_cone(int fd, t_rt *rt)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
-		if (ft_strcmp(datas[0], "coo:") == 0)
+		if (datas[0] == 0)
+			ret++;
+		else if (ft_strcmp(datas[0], "coo:") == 0)
 			cone->o = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "dir:") == 0)
 			cone->dir = get_coo(datas, 7);

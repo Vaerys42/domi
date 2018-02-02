@@ -23,10 +23,7 @@ int			ft_check_obj(char *str, int fd, t_rt *rt)
 	else if (ft_strcmp(str, "cylinder") == 0)
 		return (ft_add_cylinder(fd, rt));
 	else
-	{
-		printf("%s\n", str);
 		return (0);
-	}
 	return (0);
 }
 
