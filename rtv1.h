@@ -23,6 +23,13 @@
 # define CON 3
 # define CYL 4
 
+#define DX ray->dir->x
+#define DY ray->dir->y
+#define DZ ray->dir->z
+#define QX quad->o->x
+#define QY quad->o->y
+#define QZ quad->o->z
+
 # include "libft/includes/libft.h"
 # include "minilibx_macos/mlx.h"
 # include "math.h"
@@ -52,6 +59,16 @@ typedef	struct			s_data
 	int					endian;
 	int					*image_int;
 }						t_data;
+
+typedef struct			s_quad
+{
+	double				tab[10];
+	double				Aq;
+	double				Bq;
+	double				Cq;
+	t_coo				*dir;
+	t_coo				*o;
+}						t_quad;
 
 typedef struct			s_cylinder
 {
