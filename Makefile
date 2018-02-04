@@ -16,6 +16,7 @@ SRC =	src/main.c \
 		src/plane_p.c \
 		src/cone_p.c \
 		src/cylinder_p.c \
+		src/cylinder.c \
 
 LIBS = -framework OpenGL -framework Appkit minilibx_macos/libmlx.a libft/libft.a
 

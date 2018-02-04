@@ -35,8 +35,9 @@ void		ft_get_light(t_rt *rt)
 	rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point,
 	rt->light->o));
 	check_sphere_inter(rt, 1);
-	check_plane_inter(rt, 1);
 	check_cone_inter(rt, 1);
+	check_plane_inter(rt, 1);
+	check_cylinder_inter(rt, 1);
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
 	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r
@@ -55,6 +56,7 @@ void		ft_check_object(t_rt *rt)
 	check_sphere_inter(rt, 0);
 	check_plane_inter(rt, 0);
 	check_cone_inter(rt, 0);
+	check_cylinder_inter(rt, 0);
 	if (rt->inter->dst <= 0.01)
 		rt->inter->dst = 0;
 	if (rt->inter->dst != 0)
