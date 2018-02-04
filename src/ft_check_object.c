@@ -36,8 +36,8 @@ void		ft_get_light(t_rt *rt)
 	rt->light->o));
 	check_sphere_inter(rt, 1);
 	check_cone_inter(rt, 1);
-	check_plane_inter(rt, 1);
 	check_cylinder_inter(rt, 1);
+	check_plane_inter(rt, 1);
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
 	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r
