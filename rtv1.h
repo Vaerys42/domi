@@ -60,19 +60,10 @@ typedef	struct			s_data
 	int					*image_int;
 }						t_data;
 
-typedef struct			s_quad
-{
-	double				tab[10];
-	double				Aq;
-	double				Bq;
-	double				Cq;
-	t_coo				*dir;
-	t_coo				*o;
-}						t_quad;
-
 typedef struct			s_cylinder
 {
 	t_coo				*o;
+	t_coo				*rot;
 	double				radius;
 	t_material			*color;
 	struct s_cylinder	*next;
@@ -82,6 +73,7 @@ typedef	struct			s_cone
 {
 	t_coo				*o;
 	t_coo				*dir;
+	t_coo				*rot;
 	double				angle;
 	t_material			*color;
 	struct s_cone		*next;

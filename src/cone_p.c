@@ -22,6 +22,8 @@ void		ft_cone_info(t_cone *cone)
 		ft_putstr("Needs angle for cone. Ex angle: 30\n");
 	else if (cone->dir == NULL)
 		ft_putstr("Needs dir for cone. Ex dir: 0 -1 0\n");
+	else if (cone->rot == NULL)
+		ft_putstr("Needs rotation for cone. Ex : rot: 0 0 0\n");
 	else
 		return ;
 	exit(-1);
@@ -37,6 +39,7 @@ t_cone		*new_cone(void)
 	cone->o = NULL;
 	cone->dir = NULL;
 	cone->color = NULL;
+	cone->rot = NULL;
 	cone->angle = -1;
 	return (cone);
 }
@@ -75,6 +78,8 @@ int			ft_add_cone(int fd, t_rt *rt)
 			cone->o = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "dir:") == 0)
 			cone->dir = get_coo(datas, 7);
+		else if (ft_strcmp(datas[0], "rot:") == 0)
+			cone->rot = get_coo(datas, 7);
 		else if (ft_strcmp(datas[0], "color:") == 0)
 			cone->color = get_color(datas);
 		else if (ft_strcmp(datas[0], "angle:") == 0)

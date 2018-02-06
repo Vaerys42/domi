@@ -6,3 +6,4 @@ cylinder
 coo: 1.5 1 13
 color: 0 0 1
 radius: 0.5
+rot: 0 0 0
