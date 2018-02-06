@@ -22,6 +22,8 @@ void		ft_cylinder_info(t_cylinder *cylinder)
 		ft_putstr("Needs radius for cylinder. Ex radius: 3\n");
 	else if (cylinder->rot == NULL)
 		ft_putstr("Needs rotation for cylinder . Ex : rot: 0 0 0\n");
+	else if (cylinder->dir == NULL)
+		ft_putstr("Needs dir for cylinder . Ex : dir: 0 1 0\n");
 	else
 		return ;
 	exit(-1);
@@ -75,6 +77,8 @@ int			ft_add_cylinder(int fd, t_rt *rt)
 			cylinder->o = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "color:") == 0)
 			cylinder->color = get_color(datas);
+		else if (ft_strcmp(datas[0], "dir:") == 0)
+			cylinder->dir = get_coo(datas, 7);
 		else if (ft_strcmp(datas[0], "radius:") == 0)
 			cylinder->radius = get_radius(datas);
 		else if (ft_strcmp(datas[0], "rot:") == 0)

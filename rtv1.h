@@ -64,6 +64,7 @@ typedef struct			s_cylinder
 {
 	t_coo				*o;
 	t_coo				*rot;
+	t_coo				*dir;
 	double				radius;
 	t_material			*color;
 	struct s_cylinder	*next;
@@ -115,6 +116,7 @@ typedef	struct			s_cam
 	t_coo				*forw;
 	t_coo				*up;
 	t_coo				*right;
+	t_coo				*rot;
 }						t_cam;
 
 typedef	struct			s_view

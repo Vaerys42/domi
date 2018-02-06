@@ -39,6 +39,8 @@ void	ft_ini_cam(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->cam->right = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
+	if (!(rt->cam->rot = (t_coo*)malloc(sizeof(t_coo))))
+		ft_malloc_error();
 	rt->cam->forw->x = 0;
 	rt->cam->forw->y = 0;
 	rt->cam->forw->z = 1;
