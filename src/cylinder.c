@@ -15,18 +15,16 @@ double		cylinder_dst_rslt( double a, double b, double c)
 
 double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 {
-  t_coo cyl_o;
 	double		a;
 	double		b;
 	double		c;
 
-  cyl_o.x = (ray->o->x - cylinder->o->x);
-  cyl_o.y = (ray->o->y - cylinder->o->y);
-  cyl_o.z = (ray->o->z - cylinder->o->z);
+	ray->obj = ft_sub_vect(ray->o, cylinder->o);
 
-  a = pow(ray->dir->x, 2) + pow(ray->dir->z, 2);
-	b = 2 * cyl_o.x * ray->dir->x + 2 * cyl_o.z * ray->dir->z;
-  c = pow(cyl_o.x, 2) + pow(cyl_o.z, 2) - pow(cylinder->radius,2);
+  a = scal(ray->dir, ray->dir) - pow(scal(ray->dir, cylinder->dir), 2);
+	b = 2 * (scal(ray->dir, ray->obj) - (scal(ray->dir, cylinder->dir) * scal(ray->obj, cylinder->dir)));
+  c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) - pow(cylinder->radius,2);
+
 	if (a == 0)
 		return(- c / b);
 	if ((b * b - (4 * a * c)) < 0)
@@ -36,16 +34,23 @@ double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 
 void		new_cylinder_dst(t_rt *rt, int type, double tmp)
 {
+	//double m;
 	rt->inter->dst = tmp;
 	if (type == 0)
 		rt->inter->obj = CYL;
 	if (type == 1 && rt->inter->obj == CYL)
 	{
-    		move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
-    		rt->cylinder->color->b);
+    move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
+    rt->cylinder->color->b);
+		
 		rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x;
 		rt->inter->angle->dir->y = rt->inter->point->y;
 		rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z;
+		//m = scal(rt->ray->dir, rt->cylinder->dir) * tmp * scal(rt->ray->obj, rt->cylinder->dir);
+		//rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x - (rt->cylinder->dir->x * m);
+		//rt->inter->angle->dir->y = rt->inter->point->y - rt->cylinder->o->y - (rt->cylinder->dir->y * m);
+		//rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z - (rt->cylinder->dir->z * m);
+
 		rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);
 	}
 }

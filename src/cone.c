@@ -15,20 +15,18 @@ double		cone_dst_rslt( double a, double b, double c)
 
 double		ft_check_cone(t_cone *cone, t_ray *ray)
 {
-  t_coo con_o;
 	double		a;
 	double		b;
 	double		c;
+	double		k;
 
-	con_o.x = (ray->o->x - cone->o->x);
-	con_o.y = (ray->o->y - cone->o->y);
-	con_o.z = (ray->o->z - cone->o->z);
-	a = pow(ray->dir->x, 2) - pow(tan(cone->angle),2) * pow(ray->dir->y, 2)
-	+ pow(ray->dir->z, 2);
-	b = (2 * con_o.x * ray->dir->x) - (2 * pow(tan(cone->angle),2) *
-  con_o.y * ray->dir->y) + (2 * con_o.z * ray->dir->z);
-	c = pow(con_o.x, 2) - pow(tan(cone->angle),2) * pow(con_o.y, 2) +
-		pow(con_o.z, 2);
+	k = pow(tan(cone->angle / 2), 2) + 1;
+	ray->obj = ft_sub_vect(ray->o, cone->o);
+
+	a = scal(ray->dir, ray->dir) - k * pow(scal(ray->dir, cone->dir), 2);
+	b = (scal(ray->dir, ray->obj) - k * (scal(ray->dir, cone->dir) * scal(ray->obj, cone->dir))) * 2;
+	c = scal(ray->obj, ray->obj) - k * pow(scal(ray->obj, cone->dir), 2);
+
 	if (a == 0)
 		return(-c / b);
 

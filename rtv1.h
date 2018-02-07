@@ -108,6 +108,7 @@ typedef	struct			s_ray
 {
 	t_coo				*o;
 	t_coo				*dir;
+	t_coo				*obj;
 }						t_ray;
 
 typedef	struct			s_cam
@@ -214,5 +215,6 @@ int						ft_add_cylinder(int fd, t_rt *rt);
 void					check_cylinder_inter(t_rt *rt, int type);
 
 void					ft_get_point(t_rt *rt);
+t_coo		*ft_rotation(t_coo *vect, t_coo *rot);
 
 #endif

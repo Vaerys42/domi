@@ -62,6 +62,9 @@ void		ft_raytracing(t_rt *rt)
 	int			x;
 	int			y;
 
+	rt->cylinder->dir = ft_rotation(rt->cylinder->dir, rt->cylinder->rot);
+	rt->cone->dir = ft_rotation(rt->cone->dir, rt->cone->rot);
+
 	y = -1;
 	while (++y <= WIN_HEIGHT)
 	{

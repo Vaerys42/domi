@@ -6,5 +6,11 @@ cylinder
 coo: 1.5 1 13
 color: 0 0 1
 radius: 0.5
-rot: 0 0 0
+rot: 0 0 90
+dir: 0 1 0
+cone
+coo: 0 1 13
+color: 1 0 0
+angle: 30
+rot: 0 0 30
 dir: 0 1 0

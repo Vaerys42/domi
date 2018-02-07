@@ -102,10 +102,10 @@ void	ft_ini(t_rt *rt)
 		(-1) * rt->plane->o->z * rt->plane->norm->z;
 		rt->plane = rt->plane->next;
 	}
-	rt->cone = rt->start->con;
 	while (rt->cone != NULL)
 	{
 		rt->cone->angle = (rt->cone->angle * M_PI) / 180;
 		rt->cone = rt->cone->next;
 	}
+	rt->cone = rt->start->con;
 }
