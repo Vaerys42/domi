@@ -28,6 +28,7 @@ void		ft_get_point(t_rt *rt)
 void		ft_get_light(t_rt *rt)
 {
 	double		angle;
+	t_coo *spec;
 
 	rt->inter->dst = 99999;
 	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
@@ -40,12 +41,19 @@ void		ft_get_light(t_rt *rt)
 	check_plane_inter(rt, 1);
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
+	spec = ft_normalize(ft_add_vect(rt->light_ray->dir, ft_mult_vect(- 2 * scal(rt->light_ray->dir, rt->inter->angle->dir), rt->inter->angle->dir)));
 	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r
 	* angle * rt->light->power;
 	rt->inter->mat->g = rt->inter->mat->g * rt->light->color->g
 	* angle * rt->light->power;
 	rt->inter->mat->b = rt->inter->mat->b * rt->light->color->b
 	* angle * rt->light->power;
+	rt->inter->mat->r += rt->light->color->r * 0.1 * 
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)),2.5);
+	rt->inter->mat->g += rt->light->color->r * 0.1 * 
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)),2.5);
+	rt->inter->mat->b += rt->light->color->r * 0.1 * 
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)),2.5);
 }
 
 void		ft_check_object(t_rt *rt)

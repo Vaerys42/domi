@@ -18,13 +18,13 @@ void	ft_ini_viewplane(t_rt *rt)
 		ft_malloc_error();
 	rt->view->height = 0.35;
 	rt->view->length = 0.5;
-	rt->cam->pos->x = rt->view->length / 2;
-	rt->cam->pos->y = rt->view->height / 2;
+	rt->cam->pos->x = 0;
+	rt->cam->pos->y = 0;
 	rt->cam->pos->z = 0;
-	rt->view->up_left =
+	rt->view->up_left = ft_add_vect(rt->cam->pos, 
 	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(
-	rt->view->height / 2, rt->cam->up),
-	ft_mult_vect(rt->view->length / 2, rt->cam->right)));
+	rt->view->height / 2, rt->cam->up), ft_mult_vect(rt->view->length / 2, 
+	rt->cam->right))));
 }
 
 void	ft_ini_cam(t_rt *rt)
@@ -51,6 +51,10 @@ void	ft_ini_cam(t_rt *rt)
 	rt->cam->right->y = 0;
 	rt->cam->right->z = 0;
 	ft_ini_viewplane(rt);
+	printf("%f\t",atan(rt->cam->pos->x / 100) * 180 / M_PI);
+	rt->cam->rot->x = atan(rt->cam->pos->y) * 180 / M_PI;
+	rt->cam->rot->y = -atan(rt->cam->pos->x) * 180 / M_PI;
+	rt->cam->rot->z = 0;
 }
 
 void	ft_ini_light(t_rt *rt)
@@ -61,13 +65,13 @@ void	ft_ini_light(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->light->color = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
-	rt->light->color->r = 1.0;
-	rt->light->color->g = 1.0;
-	rt->light->color->b = 1.0;
+	rt->light->color->r = 1;
+	rt->light->color->g = 1;
+	rt->light->color->b = 1;
 	rt->light->o->x = 0.0;
-	rt->light->o->y = 1.0;
+	rt->light->o->y = 3.0;
 	rt->light->o->z = 11.0;
-	rt->light->power = 1.0;
+	rt->light->power = 0.7;
 }
 
 void	ft_malloc_ini(t_rt *rt)

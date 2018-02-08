@@ -15,9 +15,11 @@
 t_coo		*ft_rotation(t_coo *vect, t_coo *rot)
 {
 	t_coo		*new;
-  
+
 	if (!(new = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
+  if (rot->x == 0 && rot->y == 0 && rot->z == 0)
+    return(vect);
   rot = ft_mult_vect(M_PI / 180, rot);
   if (rot->x != 0)
   {
