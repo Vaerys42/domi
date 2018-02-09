@@ -4,11 +4,13 @@ color: 1 0 0
 norm: 0 1 0
 cone
 coo: 2 1 20
-color: 1 0 0
+color: 0.5 1 0
 angle: 30
+shine: 0.1
 rot: 0 0 0
 dir: 0 1 0
 sphere
 coo: -2 0 20
 radius: 1
 color: 1 0 1
+shine: 0.1

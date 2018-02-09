@@ -55,6 +55,7 @@ void		new_sphere_dst(t_rt *rt, int type, double tmp)
 	{
 		move_color(rt->inter->mat, rt->sphere->color->r,
 		rt->sphere->color->g, rt->sphere->color->b);
+		rt->light->shine = rt->sphere->shine;
 		rt->inter->angle->o = ft_sub_vect(rt->inter->point,
 		rt->sphere->o);
 		rt->inter->angle->dir = ft_normalize(rt->inter->angle->o);

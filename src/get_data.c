@@ -70,7 +70,7 @@ double		get_radius(char **str)
 	radius = ft_atof(str[1]);
 	if (radius < 0)
 	{
-		ft_putstr("Please use valid radius\n");
+		ft_putstr("Please use valid radius or shine\n");
 		exit(-1);
 	}
 	return (radius);

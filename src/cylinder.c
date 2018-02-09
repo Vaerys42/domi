@@ -50,6 +50,7 @@ void		new_cylinder_dst(t_rt *rt, int type, double tmp)
 	{
 		move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
 		rt->cylinder->color->b);
+		rt->light->shine = rt->cylinder->shine;
 		rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x;
 		rt->inter->angle->dir->y = rt->inter->point->y;
 		rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z;

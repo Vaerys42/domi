@@ -66,6 +66,7 @@ typedef struct			s_cylinder
 	t_coo				*rot;
 	t_coo				*dir;
 	double				radius;
+	double				shine;
 	t_material			*color;
 	struct s_cylinder	*next;
 }						t_cylinder;
@@ -76,6 +77,7 @@ typedef	struct			s_cone
 	t_coo				*dir;
 	t_coo				*rot;
 	double				angle;
+	double				shine;
 	t_material			*color;
 	struct s_cone		*next;
 }						t_cone;
@@ -85,7 +87,7 @@ typedef	struct			s_sphere
 	t_coo				*o;
 	double				radius;
 	t_material			*color;
-	double				spec;
+	double				shine;
 	struct s_sphere		*next;
 }						t_sphere;
 
@@ -103,6 +105,7 @@ typedef struct			s_light
 	t_coo				*o;
 	t_material			*color;
 	double				power;
+	double				shine;
 }						t_light;
 
 typedef	struct			s_ray

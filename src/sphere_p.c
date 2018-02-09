@@ -20,6 +20,8 @@ void		ft_sphere_info(t_sphere *sphere)
 		ft_putstr("Needs color for sphere (0 to 1). Ex : color: 1 0 1\n");
 	else if (sphere->radius == -1)
 		ft_putstr("Needs radius for sphere. Ex radius: 3\n");
+	else if (sphere->shine < 0)
+		ft_putstr("Needs shine for sphere. Ex shine: 0.5\n");
 	else
 		return ;
 	exit(-1);
@@ -74,6 +76,8 @@ int			ft_add_sphere(int fd, t_rt *rt)
 			sphere->color = get_color(datas);
 		else if (ft_strcmp(datas[0], "radius:") == 0)
 			sphere->radius = get_radius(datas);
+		else if (ft_strcmp(datas[0], "shine:") == 0)
+			sphere->shine = get_radius(datas);
 		else if (ft_check_obj(datas[0], fd, rt) == 1)
 			ret++;
 		else

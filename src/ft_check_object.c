@@ -14,9 +14,9 @@
 
 void		ft_brillance(t_rt *rt, t_coo *spec)
 {
-	rt->inter->mat->r += rt->light->color->r * 0.1 * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
-	rt->inter->mat->g += rt->light->color->r * 0.1 * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
-	rt->inter->mat->b += rt->light->color->r * 0.1 * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->r += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->g += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->b += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
 }
 
 void		move_color(t_material *c, double r, double g, double b)
@@ -38,6 +38,7 @@ void		ft_get_light(t_rt *rt)
 	t_coo		*spec;
 
 	rt->inter->dst = 99999;
+	rt->light->shine = 0;
 	move_color(rt->inter->mat, 0.0, 0.0, 0.0);
 	rt->light_ray->o = rt->light->o;
 	rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point,

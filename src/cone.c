@@ -52,6 +52,7 @@ void		new_cone_dst(t_rt *rt, int type, double tmp)
 	{
 		move_color(rt->inter->mat, rt->cone->color->r, rt->cone->color->g,
 		rt->cone->color->b);
+		rt->light->shine = rt->cone->shine;
 		rt->inter->angle->dir->x = rt->inter->point->x - rt->cone->o->x;
 		rt->inter->angle->dir->y = rt->inter->point->y;
 		rt->inter->angle->dir->z = rt->inter->point->z - rt->cone->o->z;

@@ -20,6 +20,8 @@ void		ft_cone_info(t_cone *cone)
 		ft_putstr("Needs color for cone (0 to 1). Ex : color: 1 0 1\n");
 	else if (cone->angle < 0)
 		ft_putstr("Needs angle for cone. Ex angle: 30\n");
+	else if (cone->shine < 0)
+		ft_putstr("Needs shine for cone. Ex shine: 0.5\n");
 	else if (cone->dir == NULL)
 		ft_putstr("Needs dir for cone. Ex dir: 0 -1 0\n");
 	else if (cone->rot == NULL)
@@ -41,12 +43,15 @@ t_cone		*new_cone(void)
 	cone->color = NULL;
 	cone->rot = NULL;
 	cone->angle = -1;
+	cone->shine = -1;
 	return (cone);
 }
 
 int			cone_lst(t_rt *rt, t_cone *cone)
 {
 	ft_cone_info(cone);
+	ft_normalize(cone->dir);
+	cone->angle = (cone->angle * M_PI) / 180;
 	if (rt->cone == NULL)
 	{
 		rt->cone = cone;
@@ -84,6 +89,8 @@ int			ft_add_cone(int fd, t_rt *rt)
 			cone->color = get_color(datas);
 		else if (ft_strcmp(datas[0], "angle:") == 0)
 			cone->angle = get_radius(datas);
+		else if (ft_strcmp(datas[0], "shine:") == 0)
+			cone->shine = get_radius(datas);
 		else if (ft_check_obj(datas[0], fd, rt) == 1)
 			ret++;
 		else

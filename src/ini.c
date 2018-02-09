@@ -19,7 +19,7 @@ void	ft_ini_viewplane(t_rt *rt)
 	rt->view->height = 0.35;
 	rt->view->length = 0.5;
 	rt->cam->pos->x = 0;
-	rt->cam->pos->y = 0;
+	rt->cam->pos->y = 1;
 	rt->cam->pos->z = 0;
 	rt->view->up_left = ft_add_vect(rt->cam->pos,
 	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(
@@ -98,18 +98,6 @@ void	ft_ini(t_rt *rt)
 	rt->ray->o = rt->cam->pos;
 	rt->plane = rt->start->pln;
 	rt->inter->obj = -1;
-	while (rt->plane != NULL)
-	{
-		rt->plane->supp = (-1) * rt->plane->o->x * rt->plane->norm->x +
-		(-1) * rt->plane->o->y * rt->plane->norm->y +
-		(-1) * rt->plane->o->z * rt->plane->norm->z;
-		rt->plane = rt->plane->next;
-	}
-	while (rt->cone != NULL)
-	{
-		rt->cone->angle = (rt->cone->angle * M_PI) / 180;
-		rt->cone = rt->cone->next;
-	}
 	rt->cone = rt->start->con;
 	make_rot(rt);
 }
