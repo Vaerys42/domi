@@ -12,14 +12,30 @@
 
 #include "../rtv1.h"
 
+void    make_rot(t_rt *rt)
+{
+  rt->cylinder = rt->start->cyl;
+  while (rt->cylinder != NULL)
+  {
+    rt->cylinder->dir = ft_rotation(rt->cylinder->dir, rt->cylinder->rot);
+    rt->cylinder = rt->cylinder->next;
+  }
+  rt->cone = rt->start->con;
+  while (rt->cone != NULL)
+  {
+	  rt->cone->dir = ft_rotation(rt->cone->dir, rt->cone->rot);
+    rt->cone = rt->cone->next;
+  }
+}
+
 t_coo		*ft_rotation(t_coo *vect, t_coo *rot)
 {
 	t_coo		*new;
 
-	if (!(new = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
   if (rot->x == 0 && rot->y == 0 && rot->z == 0)
     return(vect);
+	if (!(new = (t_coo*)malloc(sizeof(t_coo))))
+		ft_malloc_error();
   rot = ft_mult_vect(M_PI / 180, rot);
   if (rot->x != 0)
   {

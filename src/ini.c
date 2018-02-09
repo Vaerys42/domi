@@ -51,7 +51,6 @@ void	ft_ini_cam(t_rt *rt)
 	rt->cam->right->y = 0;
 	rt->cam->right->z = 0;
 	ft_ini_viewplane(rt);
-	printf("%f\t",atan(rt->cam->pos->x / 100) * 180 / M_PI);
 	rt->cam->rot->x = atan(rt->cam->pos->y) * 180 / M_PI;
 	rt->cam->rot->y = -atan(rt->cam->pos->x) * 180 / M_PI;
 	rt->cam->rot->z = 0;
@@ -112,4 +111,5 @@ void	ft_ini(t_rt *rt)
 		rt->cone = rt->cone->next;
 	}
 	rt->cone = rt->start->con;
+	make_rot(rt);
 }

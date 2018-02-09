@@ -216,6 +216,8 @@ int						ft_add_cylinder(int fd, t_rt *rt);
 void					check_cylinder_inter(t_rt *rt, int type);
 
 void					ft_get_point(t_rt *rt);
-t_coo		*ft_rotation(t_coo *vect, t_coo *rot);
+
+t_coo					*ft_rotation(t_coo *vect, t_coo *rot);
+void    				make_rot(t_rt *rt);
 
 #endif

@@ -54,9 +54,7 @@ void		ft_ini_ray(t_rt *rt, int x, int y)
 	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left,
 	ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)),
 	ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
-	//printf("bef x %f y %f z %f\t", rt->ray->dir->x, rt->ray->dir->y, rt->ray->dir->z);
 	rt->ray->dir = ft_rotation(rt->ray->dir, rt->cam->rot);
-	//printf("aft x %f y %f z %f\n", rt->ray->dir->x, rt->ray->dir->y, rt->ray->dir->z);
 	rt->ray->dir = ft_div_vect(ft_norme(rt->ray->dir), rt->ray->dir);
 
 }
@@ -65,9 +63,6 @@ void		ft_raytracing(t_rt *rt)
 {
 	int			x;
 	int			y;
-
-	rt->cylinder->dir = ft_rotation(rt->cylinder->dir, rt->cylinder->rot);
-	rt->cone->dir = ft_rotation(rt->cone->dir, rt->cone->rot);
 
 	y = -1;
 	while (++y <= WIN_HEIGHT)
