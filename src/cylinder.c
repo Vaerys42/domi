@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/09 20:20:13 by kboucaud          #+#    #+#             */
+/*   Updated: 2018/02/09 20:20:14 by kboucaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../rtv1.h"
 
-double		cylinder_dst_rslt( double a, double b, double c)
+double		cylinder_dst_rslt(double a, double b, double c)
 {
 	double	ta;
 	double	tb;
 
-	ta = (- b - sqrt((b * b) - (4 * a * c))) / (2 * a);
-	tb = (- b + sqrt((b * b) - (4 * a * c))) / (2 * a);;
-
+	ta = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
+	tb = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
 	if (ta > tb && tb > 0)
-		return(tb);
-	return(ta);
+		return (tb);
+	return (ta);
 }
 
 double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
@@ -20,57 +31,48 @@ double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 	double		c;
 
 	ray->obj = ft_sub_vect(ray->o, cylinder->o);
-
-  a = scal(ray->dir, ray->dir) - pow(scal(ray->dir, cylinder->dir), 2);
+	a = scal(ray->dir, ray->dir) - pow(scal(ray->dir, cylinder->dir), 2);
 	b = 2 * (scal(ray->dir, ray->obj) - (scal(ray->dir, cylinder->dir) * scal(ray->obj, cylinder->dir)));
-  c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) - pow(cylinder->radius,2);
-
+	c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) - pow(cylinder->radius, 2);
 	if (a == 0)
-		return(- c / b);
+		return (-c / b);
 	if ((b * b - (4 * a * c)) < 0)
-		return(0);
-	return(cylinder_dst_rslt(a, b, c));
+		return (0);
+	return (cylinder_dst_rslt(a, b, c));
 }
 
 void		new_cylinder_dst(t_rt *rt, int type, double tmp)
 {
-	//double m;
 	rt->inter->dst = tmp;
 	if (type == 0)
 		rt->inter->obj = CYL;
 	if (type == 1 && rt->inter->obj == CYL)
 	{
-    move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
-    rt->cylinder->color->b);
-		
+		move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
+		rt->cylinder->color->b);
 		rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x;
 		rt->inter->angle->dir->y = rt->inter->point->y;
 		rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z;
-		//m = scal(rt->ray->dir, rt->cylinder->dir) * tmp * scal(rt->ray->obj, rt->cylinder->dir);
-		//rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x - (rt->cylinder->dir->x * m);
-		//rt->inter->angle->dir->y = rt->inter->point->y - rt->cylinder->o->y - (rt->cylinder->dir->y * m);
-		//rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z - (rt->cylinder->dir->z * m);
-
 		rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);
 	}
 }
 
-void				check_cylinder_inter(t_rt *rt, int type)
+void		check_cylinder_inter(t_rt *rt, int type)
 {
-  double tmp;
+	double tmp;
 
 	if (rt->start->cyl != NULL)
 	{
-    rt->cylinder = rt->start->cyl;
-    while (rt->cylinder != NULL)
+		rt->cylinder = rt->start->cyl;
+		while (rt->cylinder != NULL)
 		{
 			if (type == 0)
-          tmp = ft_check_cylinder(rt->cylinder, rt->ray);
-      else
-          tmp = ft_check_cylinder(rt->cylinder, rt->light_ray);
-      if (tmp > 0.01 && tmp < rt->inter->dst)
-        new_cylinder_dst(rt, type, tmp);
-        rt->cylinder = rt->cylinder->next;
-    }
-  }
+				tmp = ft_check_cylinder(rt->cylinder, rt->ray);
+			else
+				tmp = ft_check_cylinder(rt->cylinder, rt->light_ray);
+			if (tmp > 0.01 && tmp < rt->inter->dst)
+				new_cylinder_dst(rt, type, tmp);
+			rt->cylinder = rt->cylinder->next;
+		}
+	}
 }

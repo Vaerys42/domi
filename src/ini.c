@@ -21,9 +21,9 @@ void	ft_ini_viewplane(t_rt *rt)
 	rt->cam->pos->x = 0;
 	rt->cam->pos->y = 0;
 	rt->cam->pos->z = 0;
-	rt->view->up_left = ft_add_vect(rt->cam->pos, 
+	rt->view->up_left = ft_add_vect(rt->cam->pos,
 	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(
-	rt->view->height / 2, rt->cam->up), ft_mult_vect(rt->view->length / 2, 
+	rt->view->height / 2, rt->cam->up), ft_mult_vect(rt->view->length / 2,
 	rt->cam->right))));
 }
 

@@ -56,7 +56,6 @@ void		ft_ini_ray(t_rt *rt, int x, int y)
 	ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
 	rt->ray->dir = ft_rotation(rt->ray->dir, rt->cam->rot);
 	rt->ray->dir = ft_div_vect(ft_norme(rt->ray->dir), rt->ray->dir);
-
 }
 
 void		ft_raytracing(t_rt *rt)
