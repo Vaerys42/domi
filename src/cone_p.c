@@ -65,6 +65,30 @@ int			cone_lst(t_rt *rt, t_cone *cone)
 	return (1);
 }
 
+void		ft_read_line(char **datas, t_cone *cone, t_rt *rt, int fd)
+{
+	int		rand;
+
+	if (datas[0] == 0)
+		rand = 0;	
+	else if (ft_strcmp(datas[0], "coo:") == 0)
+		cone->o = get_coo(datas, 2);
+	else if (ft_strcmp(datas[0], "dir:") == 0)
+		cone->dir = get_coo(datas, 7);
+	else if (ft_strcmp(datas[0], "rot:") == 0)
+		cone->rot = get_coo(datas, 7);
+	else if (ft_strcmp(datas[0], "color:") == 0)
+		cone->color = get_color(datas);
+	else if (ft_strcmp(datas[0], "angle:") == 0)
+		cone->angle = get_radius(datas);
+	else if (ft_strcmp(datas[0], "shine:") == 0)
+		cone->shine = get_radius(datas);
+	else if (ft_check_obj(datas[0], fd, rt) == 1)
+		rand = 0;
+	else
+		ft_bad_arg(5);
+}
+
 int			ft_add_cone(int fd, t_rt *rt)
 {
 	int			ret;
@@ -77,24 +101,7 @@ int			ft_add_cone(int fd, t_rt *rt)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
-		if (datas[0] == 0)
-			ret++;
-		else if (ft_strcmp(datas[0], "coo:") == 0)
-			cone->o = get_coo(datas, 2);
-		else if (ft_strcmp(datas[0], "dir:") == 0)
-			cone->dir = get_coo(datas, 7);
-		else if (ft_strcmp(datas[0], "rot:") == 0)
-			cone->rot = get_coo(datas, 7);
-		else if (ft_strcmp(datas[0], "color:") == 0)
-			cone->color = get_color(datas);
-		else if (ft_strcmp(datas[0], "angle:") == 0)
-			cone->angle = get_radius(datas);
-		else if (ft_strcmp(datas[0], "shine:") == 0)
-			cone->shine = get_radius(datas);
-		else if (ft_check_obj(datas[0], fd, rt) == 1)
-			ret++;
-		else
-			ft_bad_arg(5);
+		ft_read_line(datas, cone, rt, fd);
 	}
 	return (cone_lst(rt, cone));
 }

@@ -19,7 +19,7 @@ void	ft_ini_viewplane(t_rt *rt)
 	rt->view->height = 0.35;
 	rt->view->length = 0.5;
 	rt->cam->pos->x = 0;
-	rt->cam->pos->y = 1;
+	rt->cam->pos->y = 0;
 	rt->cam->pos->z = 0;
 	rt->view->up_left = ft_add_vect(rt->cam->pos,
 	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(

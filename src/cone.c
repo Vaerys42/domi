@@ -34,7 +34,8 @@ double		ft_check_cone(t_cone *cone, t_ray *ray)
 	k = pow(tan(cone->angle / 2), 2) + 1;
 	ray->obj = ft_sub_vect(ray->o, cone->o);
 	a = scal(ray->dir, ray->dir) - k * pow(scal(ray->dir, cone->dir), 2);
-	b = (scal(ray->dir, ray->obj) - k * (scal(ray->dir, cone->dir) * scal(ray->obj, cone->dir))) * 2;
+	b = (scal(ray->dir, ray->obj) - k * (scal(ray->dir, cone->dir) *
+	scal(ray->obj, cone->dir))) * 2;
 	c = scal(ray->obj, ray->obj) - k * pow(scal(ray->obj, cone->dir), 2);
 	if (a == 0)
 		return (-c / b);

@@ -32,8 +32,10 @@ double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 
 	ray->obj = ft_sub_vect(ray->o, cylinder->o);
 	a = scal(ray->dir, ray->dir) - pow(scal(ray->dir, cylinder->dir), 2);
-	b = 2 * (scal(ray->dir, ray->obj) - (scal(ray->dir, cylinder->dir) * scal(ray->obj, cylinder->dir)));
-	c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) - pow(cylinder->radius, 2);
+	b = 2 * (scal(ray->dir, ray->obj) - (scal(ray->dir, cylinder->dir) *
+	scal(ray->obj, cylinder->dir)));
+	c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) -
+	pow(cylinder->radius, 2);
 	if (a == 0)
 		return (-c / b);
 	if ((b * b - (4 * a * c)) < 0)
@@ -48,12 +50,15 @@ void		new_cylinder_dst(t_rt *rt, int type, double tmp)
 		rt->inter->obj = CYL;
 	if (type == 1 && rt->inter->obj == CYL)
 	{
-		move_color(rt->inter->mat, rt->cylinder->color->r, rt->cylinder->color->g,
+		move_color(rt->inter->mat, rt->cylinder->color->r,
+		rt->cylinder->color->g,
 		rt->cylinder->color->b);
 		rt->light->shine = rt->cylinder->shine;
-		rt->inter->angle->dir->x = rt->inter->point->x - rt->cylinder->o->x;
+		rt->inter->angle->dir->x = rt->inter->point->x -
+		rt->cylinder->o->x;
 		rt->inter->angle->dir->y = rt->inter->point->y;
-		rt->inter->angle->dir->z = rt->inter->point->z - rt->cylinder->o->z;
+		rt->inter->angle->dir->z = rt->inter->point->z -
+		rt->cylinder->o->z;
 		rt->inter->angle->dir = ft_normalize(rt->inter->angle->dir);
 	}
 }

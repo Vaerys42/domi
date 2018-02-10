@@ -14,9 +14,12 @@
 
 void		ft_brillance(t_rt *rt, t_coo *spec)
 {
-	rt->inter->mat->r += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
-	rt->inter->mat->g += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
-	rt->inter->mat->b += rt->light->color->r * rt->light->shine * pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->r += rt->light->color->r * rt->light->shine *
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->g += rt->light->color->r * rt->light->shine *
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
+	rt->inter->mat->b += rt->light->color->r * rt->light->shine *
+	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
 }
 
 void		move_color(t_material *c, double r, double g, double b)
@@ -49,10 +52,14 @@ void		ft_get_light(t_rt *rt)
 	check_plane_inter(rt, 1);
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
-	spec = ft_normalize(ft_add_vect(rt->light_ray->dir, ft_mult_vect(-2 * scal(rt->light_ray->dir, rt->inter->angle->dir), rt->inter->angle->dir)));
-	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r * angle * rt->light->power;
-	rt->inter->mat->g = rt->inter->mat->g * rt->light->color->g * angle * rt->light->power;
-	rt->inter->mat->b = rt->inter->mat->b * rt->light->color->b * angle * rt->light->power;
+	spec = ft_normalize(ft_add_vect(rt->light_ray->dir, ft_mult_vect(-2 *
+	scal(rt->light_ray->dir, rt->inter->angle->dir), rt->inter->angle->dir)));
+	rt->inter->mat->r = rt->inter->mat->r * rt->light->color->r * angle *
+	rt->light->power;
+	rt->inter->mat->g = rt->inter->mat->g * rt->light->color->g * angle *
+	rt->light->power;
+	rt->inter->mat->b = rt->inter->mat->b * rt->light->color->b * angle *
+	rt->light->power;
 	ft_brillance(rt, spec);
 }
 

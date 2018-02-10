@@ -61,6 +61,30 @@ t_cylinder	*cyl_ini(void)
 	return (cylinder);
 }
 
+void		ft_cyl_read_line(char **datas, t_cylinder *cylinder, t_rt *rt, int fd)
+{
+	int		rand;
+
+	if (datas[0] == 0)
+		rand = 0;
+	if (ft_strcmp(datas[0], "coo:") == 0)
+		cylinder->o = get_coo(datas, 2);
+	else if (ft_strcmp(datas[0], "color:") == 0)
+		cylinder->color = get_color(datas);
+	else if (ft_strcmp(datas[0], "dir:") == 0)
+		cylinder->dir = get_coo(datas, 7);
+	else if (ft_strcmp(datas[0], "radius:") == 0)
+		cylinder->radius = get_radius(datas);
+	else if (ft_strcmp(datas[0], "rot:") == 0)
+		cylinder->rot = get_coo(datas, 7);
+	else if (ft_strcmp(datas[0], "shine:") == 0)
+		cylinder->shine = get_radius(datas);
+	else if (ft_check_obj(datas[0], fd, rt) == 1)
+		rand = 0;
+	else
+		ft_bad_arg(5);
+}
+
 int			ft_add_cylinder(int fd, t_rt *rt)
 {
 	int			ret;
@@ -73,24 +97,7 @@ int			ft_add_cylinder(int fd, t_rt *rt)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
-		if (datas[0] == 0)
-			ret++;
-		if (ft_strcmp(datas[0], "coo:") == 0)
-			cylinder->o = get_coo(datas, 2);
-		else if (ft_strcmp(datas[0], "color:") == 0)
-			cylinder->color = get_color(datas);
-		else if (ft_strcmp(datas[0], "dir:") == 0)
-			cylinder->dir = get_coo(datas, 7);
-		else if (ft_strcmp(datas[0], "radius:") == 0)
-			cylinder->radius = get_radius(datas);
-		else if (ft_strcmp(datas[0], "rot:") == 0)
-			cylinder->rot = get_coo(datas, 7);
-		else if (ft_strcmp(datas[0], "shine:") == 0)
-			cylinder->shine = get_radius(datas);
-		else if (ft_check_obj(datas[0], fd, rt) == 1)
-			ret++;
-		else
-			ft_bad_arg(5);
+		ft_cyl_read_line(datas, cylinder, rt, fd);
 	}
 	return (cylinder_list(rt, cylinder));
 }
