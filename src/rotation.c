@@ -40,19 +40,22 @@ t_coo		*ft_rotation(t_coo *vect, t_coo *rot)
 	if (rot->x != 0)
 	{
 		new->x = vect->x;
-		new->y = vect->y * cos(rot->x) - vect->z * sin(rot->x);
-		new->z = vect->y * sin(rot->x) + vect->z * cos(rot->x);
+		new->y = vect->y * cos(rot->x) + vect->z * sin(rot->x);
+		new->z = - vect->y * sin(rot->x) + vect->z * cos(rot->x);
+		vect = new;
 	}
 	if (rot->y != 0)
 	{
-		new->x = vect->x * cos(rot->y) + vect->z * sin(rot->y);
+		new->x = vect->x * cos(rot->y) - vect->z * sin(rot->y);
 		new->y = vect->y;
-		new->z = -vect->x * sin(rot->y) + vect->z * cos(rot->y);
+		new->z = vect->x * sin(rot->y) + vect->z * cos(rot->y);
+		vect = new;
+
 	}
 	if (rot->z != 0)
 	{
-		new->x = vect->x * cos(rot->z) - vect->y * sin(rot->z);
-		new->y = vect->x * sin(rot->z) + vect->y * cos(rot->z);
+		new->x = vect->x * cos(rot->z) + vect->y * sin(rot->z);
+		new->y = - vect->x * sin(rot->z) + vect->y * cos(rot->z);
 		new->z = vect->z;
 	}
 	return (new);

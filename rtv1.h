@@ -15,20 +15,13 @@
 
 # define WIN_LEN 640
 # define WIN_HEIGHT 480
-# define PLN_DST 1
+# define PLN_DST 100
 # define AMB_LIGHT 0.2
 
 # define SPH 1
 # define PLN 2
 # define CON 3
 # define CYL 4
-
-//#define DX ray->dir->x
-//#define DY ray->dir->y
-//#define DZ ray->dir->z
-//#define QX quad->o->x
-//#define QY quad->o->y
-//#define QZ quad->o->z
 
 # include "libft/includes/libft.h"
 # include "minilibx_macos/mlx.h"
