@@ -22,8 +22,6 @@ void		ft_cone_info(t_cone *cone)
 		ft_putstr("Needs angle for cone. Ex angle: 30\n");
 	else if (cone->shine < 0)
 		ft_putstr("Needs shine for cone. Ex shine: 0.5\n");
-	else if (cone->dir == NULL)
-		ft_putstr("Needs dir for cone. Ex dir: 0 -1 0\n");
 	else if (cone->rot == NULL)
 		ft_putstr("Needs rotation for cone. Ex : rot: 0 0 0\n");
 	else
@@ -39,7 +37,11 @@ t_cone		*new_cone(void)
 		ft_malloc_error();
 	cone->next = NULL;
 	cone->o = NULL;
-	cone->dir = NULL;
+	if (!(cone->dir = (t_coo*)malloc(sizeof(t_coo))))
+		ft_malloc_error();
+	cone->dir->x = 0;
+	cone->dir->y = 1;
+	cone->dir->z = 0;
 	cone->color = NULL;
 	cone->rot = NULL;
 	cone->angle = -1;
@@ -73,8 +75,6 @@ void		ft_read_line(char **datas, t_cone *cone, t_rt *rt, int fd)
 		rand = 0;	
 	else if (ft_strcmp(datas[0], "coo:") == 0)
 		cone->o = get_coo(datas, 2);
-	else if (ft_strcmp(datas[0], "dir:") == 0)
-		cone->dir = get_coo(datas, 7);
 	else if (ft_strcmp(datas[0], "rot:") == 0)
 		cone->rot = get_coo(datas, 7);
 	else if (ft_strcmp(datas[0], "color:") == 0)
