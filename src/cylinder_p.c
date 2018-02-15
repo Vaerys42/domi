@@ -64,22 +64,22 @@ t_cylinder	*cyl_ini(void)
 	return (cylinder);
 }
 
-void		ft_cyl_read_line(char **datas, t_cylinder *cylinder, t_rt *rt, int fd)
+void		ft_cyl_read_line(char **datas, t_cylinder *cyl, t_rt *rt, int fd)
 {
 	int		rand;
 
 	if (datas[0] == 0)
 		rand = 0;
 	if (ft_strcmp(datas[0], "coo:") == 0)
-		cylinder->o = get_coo(datas, 2);
+		cyl->o = get_coo(datas, 2);
 	else if (ft_strcmp(datas[0], "color:") == 0)
-		cylinder->color = get_color(datas);
+		cyl->color = get_color(datas);
 	else if (ft_strcmp(datas[0], "radius:") == 0)
-		cylinder->radius = get_radius(datas);
+		cyl->radius = get_radius(datas);
 	else if (ft_strcmp(datas[0], "rot:") == 0)
-		cylinder->rot = get_coo(datas, 7);
+		cyl->rot = get_coo(datas, 7);
 	else if (ft_strcmp(datas[0], "shine:") == 0)
-		cylinder->shine = get_radius(datas);
+		cyl->shine = get_radius(datas);
 	else if (ft_check_obj(datas[0], fd, rt) == 1)
 		rand = 0;
 	else

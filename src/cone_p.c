@@ -72,7 +72,7 @@ void		ft_read_line(char **datas, t_cone *cone, t_rt *rt, int fd)
 	int		rand;
 
 	if (datas[0] == 0)
-		rand = 0;	
+		rand = 0;
 	else if (ft_strcmp(datas[0], "coo:") == 0)
 		cone->o = get_coo(datas, 2);
 	else if (ft_strcmp(datas[0], "rot:") == 0)
