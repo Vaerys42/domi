@@ -184,6 +184,7 @@ void					ft_raytracing(t_rt *rt);
 
 void					ft_check_object(t_rt *rt);
 
+t_coo					*ft_new_vect(float x, float y, float z);
 t_coo					*ft_add_vect(t_coo *vect1, t_coo *vect2);
 t_coo					*ft_div_vect(double i, t_coo *vect);
 t_coo					*ft_mult_vect(double i, t_coo *vect);

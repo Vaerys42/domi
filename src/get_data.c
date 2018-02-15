@@ -24,16 +24,9 @@ int			tab_len(char **str)
 
 t_coo		*get_coo(char **str, int err)
 {
-	t_coo	*coo;
-
 	if (tab_len(str) != 4)
 		ft_bad_arg(err);
-	if (!(coo = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	coo->x = ft_atof(str[1]);
-	coo->y = ft_atof(str[2]);
-	coo->z = ft_atof(str[3]);
-	return (coo);
+	return (ft_new_vect(ft_atof(str[1]), ft_atof(str[2]), ft_atof(str[3])));
 }
 
 t_material	*get_color(char **str)

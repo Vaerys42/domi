@@ -9,7 +9,7 @@ cone
 coo: 2 1 20
 color: 0.5 1 0
 angle: 40
-shine: 0.1
+shine: 0.2
 rot: 0 0 30
 sphere
 coo: -2 0 20
