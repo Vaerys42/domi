@@ -18,6 +18,7 @@ SRC =	src/main.c \
 		src/cylinder_p.c \
 		src/cylinder.c \
 		src/rotation.c \
+		src/cam_p.c \
 
 LIBS = -framework OpenGL -framework Appkit minilibx_macos/libmlx.a libft/libft.a
 

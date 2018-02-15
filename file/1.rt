@@ -1,3 +1,6 @@
+camera
+coo: 0 0 0
+rot: 0 0 0
 plane
 coo: 0 -1 0
 color: 1 0 0

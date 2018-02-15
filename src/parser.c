@@ -22,6 +22,8 @@ int			ft_check_obj(char *str, int fd, t_rt *rt)
 		return (ft_add_cone(fd, rt));
 	else if (ft_strcmp(str, "cylinder") == 0)
 		return (ft_add_cylinder(fd, rt));
+	else if (ft_strcmp(str, "camera") == 0)
+		return (ft_add_cam(fd, rt));
 	else
 		return (0);
 	return (0);
@@ -35,6 +37,7 @@ void		ft_ini_struct(t_rt *rt)
 	rt->plane = NULL;
 	rt->cone = NULL;
 	rt->cylinder = NULL;
+	rt->cam = NULL;
 	rt->start->sph = NULL;
 	rt->start->pln = NULL;
 	rt->start->con = NULL;
@@ -55,4 +58,9 @@ void		parser(t_rt *rt, char *file)
 		ft_check_obj(line, fd, rt);
 	if (ret == -1)
 		ft_bad_arg(-1);
+	if (rt->cam == NULL)
+	{
+		ft_putstr("Needs a cam\n");
+		exit(-1);
+	}
 }

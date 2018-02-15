@@ -73,6 +73,4 @@ void		ft_raytracing(t_rt *rt)
 			ft_ray(rt, x, y);
 		}
 	}
-	mlx_put_image_to_window(rt->data->mlx, rt->data->mlx_window,
-	rt->data->mlx_image, 0, 0);
 }

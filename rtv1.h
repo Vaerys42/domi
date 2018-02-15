@@ -211,9 +211,11 @@ int						ft_add_plane(int fd, t_rt *rt);
 int						ft_add_cylinder(int fd, t_rt *rt);
 void					check_cylinder_inter(t_rt *rt, int type);
 
+int						ft_add_cam(int fd, t_rt *rt);
+
 void					ft_get_point(t_rt *rt);
 
 t_coo					*ft_rotation(t_coo *vect, t_coo *rot);
-void    				make_rot(t_rt *rt);
+void					make_rot(t_rt *rt);
 
 #endif

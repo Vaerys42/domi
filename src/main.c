@@ -48,6 +48,8 @@ int			main(int argc, char **argv)
 	parser(rt, argv[1]);
 	ft_ini(rt);
 	ft_raytracing(rt);
+	mlx_put_image_to_window(rt->data->mlx, rt->data->mlx_window,
+	rt->data->mlx_image, 0, 0);
 	window(rt);
 	return (0);
 }

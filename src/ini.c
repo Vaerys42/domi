@@ -18,9 +18,6 @@ void	ft_ini_viewplane(t_rt *rt)
 		ft_malloc_error();
 	rt->view->height = 35;
 	rt->view->length = 50;
-	rt->cam->pos->x = 10;
-	rt->cam->pos->y = 5;
-	rt->cam->pos->z = -10;
 	rt->view->up_left = ft_add_vect(rt->cam->pos,
 	ft_add_vect(ft_mult_vect(PLN_DST, rt->cam->forw), ft_sub_vect(ft_mult_vect(
 	rt->view->height / 2, rt->cam->up), ft_mult_vect(rt->view->length / 2,
@@ -29,17 +26,11 @@ void	ft_ini_viewplane(t_rt *rt)
 
 void	ft_ini_cam(t_rt *rt)
 {
-	if (!(rt->cam = (t_cam*)malloc(sizeof(t_cam))))
-		ft_malloc_error();
-	if (!(rt->cam->pos = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
 	if (!(rt->cam->forw = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	if (!(rt->cam->up = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	if (!(rt->cam->right = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	if (!(rt->cam->rot = (t_coo*)malloc(sizeof(t_coo))))
 		ft_malloc_error();
 	rt->cam->forw->x = 0;
 	rt->cam->forw->y = 0;
@@ -51,9 +42,6 @@ void	ft_ini_cam(t_rt *rt)
 	rt->cam->right->y = 0;
 	rt->cam->right->z = 0;
 	ft_ini_viewplane(rt);
-	rt->cam->rot->x = 0;
-	rt->cam->rot->y = 30;
-	rt->cam->rot->z = -25;
 }
 
 void	ft_ini_light(t_rt *rt)
