@@ -64,7 +64,6 @@ int			ft_add_sphere(int fd, t_rt *rt)
 	t_sphere	*sphere;
 
 	sphere = sph_ini();
-	line = ft_strdup("");
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
@@ -82,6 +81,8 @@ int			ft_add_sphere(int fd, t_rt *rt)
 			ret++;
 		else
 			ft_bad_arg(5);
+		ft_freetab(datas);
+		free(line);
 	}
 	return (sphere_list(rt, sphere));
 }

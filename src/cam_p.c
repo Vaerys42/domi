@@ -50,7 +50,6 @@ int			ft_add_cam(int fd, t_rt *rt)
 	t_cam		*cam;
 
 	cam = ini_cam();
-	line = ft_strdup("");
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
@@ -64,6 +63,8 @@ int			ft_add_cam(int fd, t_rt *rt)
 			ret++;
 		else
 			ft_bad_arg(5);
+		ft_freetab(datas);
+		free(line);
 	}
 	return (cam_lst(rt, cam));
 }

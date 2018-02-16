@@ -55,7 +55,10 @@ void		parser(t_rt *rt, char *file)
 		ft_bad_arg(1);
 	ft_ini_struct(rt);
 	while ((ret = get_next_line(fd, &line)) > 0)
+	{
 		ft_check_obj(line, fd, rt);
+		free(line);
+	}
 	if (ret == -1)
 		ft_bad_arg(-1);
 	if (rt->cam == NULL)

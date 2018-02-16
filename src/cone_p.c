@@ -97,11 +97,12 @@ int			ft_add_cone(int fd, t_rt *rt)
 	t_cone		*cone;
 
 	cone = new_cone();
-	line = ft_strdup("");
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
 		ft_read_line(datas, cone, rt, fd);
+		ft_freetab(datas);
+		free(line);
 	}
 	return (cone_lst(rt, cone));
 }

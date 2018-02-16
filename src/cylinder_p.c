@@ -94,11 +94,12 @@ int			ft_add_cylinder(int fd, t_rt *rt)
 	t_cylinder	*cylinder;
 
 	cylinder = cyl_ini();
-	line = ft_strdup("");
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
 		ft_cyl_read_line(datas, cylinder, rt, fd);
+		ft_freetab(datas);
+		free(line);
 	}
 	return (cylinder_list(rt, cylinder));
 }

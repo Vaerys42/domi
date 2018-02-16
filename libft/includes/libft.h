@@ -83,6 +83,7 @@ char			*ft_strndup(char *str, int size, int start);
 char			*ft_strnjoin(char *s1, char *s2, const int size);
 char			*ft_strjoin_free(char *s1, char *s2, int mode);
 float			ft_atof(const char *str);
+void			ft_freetab(char **tab);
 
 typedef struct	s_list
 {
