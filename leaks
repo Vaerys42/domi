@@ -1,0 +1,25 @@
+Process:         RTV1 [72249]
+Path:            /Users/kboucaud/Documents/RTV1/./RTV1
+Load Address:    0x105c83000
+Identifier:      RTV1
+Version:         ???
+Code Type:       X86-64
+Parent Process:  zsh [69509]
+
+Date/Time:       2018-02-17 05:15:58.365 +0100
+Launch Time:     2018-02-17 05:15:49.959 +0100
+OS Version:      Mac OS X 10.12.6 (16G1212)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 9.1 (9B55)
+----
+
+leaks Report Version:  2.0
+Process 72249: 17366 nodes malloced for 11237 KB
+Process 72249: 3 leaks for 48 total leaked bytes.
+Leak: 0x7fd410401b40  size=16  zone: DefaultMallocZone_0x105cac000
+	0x6e610000 0x30200065 0x00003020 0xb0000000 	..ane. 0 0......
+Leak: 0x7fd410401b50  size=16  zone: DefaultMallocZone_0x105cac000
+	0x656d0000 0xb0006172 0x00000000 0xb0000000 	..mera..........
+Leak: 0x7fd410401b70  size=16  zone: DefaultMallocZone_0x105cac000
+	0x6d720000 0x2030203a 0x312d2030 0xb0000000 	..rm: 0 0 -1....
