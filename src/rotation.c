@@ -32,14 +32,14 @@ t_coo		ft_rotation(t_coo vect, t_coo rot)
 {
 	t_coo		new;
 
-	if (rot->x == 0 && rot->y == 0 && rot->z == 0)
+	if (rot.x == 0 && rot.y == 0 && rot.z == 0)
 		return (vect);
 	rot = ft_mult_vect(M_PI / 180, rot);
 	if (rot.x != 0)
 	{
 		new.x = vect.x;
 		new.y = vect.y * cos(rot.x) + vect.z * sin(rot.x);
-		new->z = -vect.y * sin(rot.x) + vect.z * cos(rot.x);
+		new.z = -vect.y * sin(rot.x) + vect.z * cos(rot.x);
 		vect = new;
 	}
 	if (rot.y != 0)

@@ -12,32 +12,19 @@
 
 #include "../rtv1.h"
 
-void		ft_cam_info(t_cam *cam)
-{
-	if (cam->pos == NULL)
-		ft_putstr("Needs origin coordinate for cam. Ex : coo: 1 2 5\n");
-	else if (cam->rot == NULL)
-		ft_putstr("Needs rotation for the cam. Ex rot: 0 90 0 (In degres,\
-		0 0 0 for no rot)\n");
-	else
-		return ;
-	exit(-1);
-}
-
 t_cam		*ini_cam(void)
 {
 	t_cam		*cam;
 
 	if (!(cam = (t_cam*)malloc(sizeof(t_cam))))
 		ft_malloc_error();
-	cam->pos = NULL;
-	cam->rot = NULL;
+	cam->pos = ft_new_vect(0, 0, 0);
+	cam->rot = ft_new_vect(0, 0, 0);
 	return (cam);
 }
 
 int			cam_lst(t_rt *rt, t_cam *cam)
 {
-	ft_cam_info(cam);
 	rt->cam = cam;
 	return (1);
 }

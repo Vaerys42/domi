@@ -14,9 +14,7 @@
 
 void		ft_sphere_info(t_sphere *sphere)
 {
-	if (sphere->o == NULL)
-		ft_putstr("Needs origin coordinate for sphere. Ex : coo: 1 2 5\n");
-	else if (sphere->color == NULL)
+	if (sphere->color == NULL)
 		ft_putstr("Needs color for sphere (0 to 1). Ex : color: 1 0 1\n");
 	else if (sphere->radius == -1)
 		ft_putstr("Needs radius for sphere. Ex radius: 3\n");
@@ -50,7 +48,7 @@ t_sphere	*sph_ini(void)
 	if (!(sphere = (t_sphere*)malloc(sizeof(t_sphere))))
 		ft_malloc_error();
 	sphere->next = NULL;
-	sphere->o = NULL;
+	sphere->o = ft_new_vect(0, 0, 0);
 	sphere->color = NULL;
 	sphere->radius = -1;
 	return (sphere);

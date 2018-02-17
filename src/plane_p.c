@@ -14,12 +14,8 @@
 
 void		ft_plane_info(t_plane *plane)
 {
-	if (plane->o == NULL)
-		ft_putstr("Needs origin coordinate for plane. Ex : coo: 1 2 5\n");
-	else if (plane->color == NULL)
+	if (plane->color == NULL)
 		ft_putstr("Needs color for plane (0 to 1). Ex : color: 1 0 1\n");
-	else if (plane->norm == NULL)
-		ft_putstr("Needs normal vector for plnae. Ex norm: 0 0 1\n");
 	else
 		return ;
 	exit(-1);
@@ -32,9 +28,9 @@ t_plane		*ini_plane(void)
 	if (!(plane = (t_plane*)malloc(sizeof(t_plane))))
 		ft_malloc_error();
 	plane->next = NULL;
-	plane->o = NULL;
+	plane->o = ft_new_vect(0, 0, 0);
 	plane->color = NULL;
-	plane->norm = NULL;
+	plane->norm = ft_new_vect(0, 1, 0);
 	return (plane);
 }
 
@@ -42,9 +38,9 @@ int			plane_lst(t_rt *rt, t_plane *plane)
 {
 	ft_plane_info(plane);
 	plane->norm = ft_normalize(plane->norm);
-	plane->supp = (-1) * plane->o->x * plane->norm->x +
-	(-1) * plane->o->y * plane->norm->y +
-	(-1) * plane->o->z * plane->norm->z;
+	plane->supp = (-1) * plane->o.x * plane->norm.x +
+	(-1) * plane->o.y * plane->norm.y +
+	(-1) * plane->o.z * plane->norm.z;
 	if (rt->plane == NULL)
 	{
 		rt->plane = plane;

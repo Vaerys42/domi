@@ -14,16 +14,12 @@
 
 void		ft_cone_info(t_cone *cone)
 {
-	if (cone->o == NULL)
-		ft_putstr("Needs origin coordinate for cone. Ex : coo: 1 2 5\n");
-	else if (cone->color == NULL)
+	if (cone->color == NULL)
 		ft_putstr("Needs color for cone (0 to 1). Ex : color: 1 0 1\n");
 	else if (cone->angle < 0)
 		ft_putstr("Needs angle for cone. Ex angle: 30\n");
 	else if (cone->shine < 0)
 		ft_putstr("Needs shine for cone. Ex shine: 0.5\n");
-	else if (cone->rot == NULL)
-		ft_putstr("Needs rotation for cone. Ex : rot: 0 0 0\n");
 	else
 		return ;
 	exit(-1);
@@ -36,12 +32,10 @@ t_cone		*new_cone(void)
 	if (!(cone = (t_cone*)malloc(sizeof(t_cone))))
 		ft_malloc_error();
 	cone->next = NULL;
-	cone->o = NULL;
-	cone->dir.x = 0;
-	cone->dir.y = 1;
-	cone->dir.z = 0;
+	cone->o = ft_new_vect(0, 0, 0);
+	cone->dir = ft_new_vect(0, 1, 0);
 	cone->color = NULL;
-	cone->rot = NULL;
+	cone->rot = ft_new_vect(0, 0, 0);
 	cone->angle = -1;
 	cone->shine = -1;
 	return (cone);

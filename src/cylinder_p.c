@@ -14,14 +14,10 @@
 
 void		ft_cylinder_info(t_cylinder *cylinder)
 {
-	if (cylinder->o == NULL)
-		ft_putstr("Needs origin coordinate for cylinder. Ex : coo: 1 2 5\n");
-	else if (cylinder->color == NULL)
+	if (cylinder->color == NULL)
 		ft_putstr("Needs color for cylinder (0 to 1). Ex : color: 1 0 1\n");
 	else if (cylinder->radius == -1)
 		ft_putstr("Needs radius for cylinder. Ex radius: 3\n");
-	else if (cylinder->rot == NULL)
-		ft_putstr("Needs rotation for cylinder . Ex : rot: 0 0 0\n");
 	else if (cylinder->shine < 0)
 		ft_putstr("Needs shine for cylinder. Ex shine: 0.5\n");
 	else
@@ -51,13 +47,11 @@ t_cylinder	*cyl_ini(void)
 
 	if (!(cylinder = (t_cylinder*)malloc(sizeof(t_cylinder))))
 		ft_malloc_error();
-	cylinder->dir.x = 0;
-	cylinder->dir.y = 1;
-	cylinder->dir.z = 0;
+	cylinder->dir = ft_new_vect(0, 1, 0);
 	cylinder->next = NULL;
-	cylinder->o = NULL;
+	cylinder->o = ft_new_vect(0, 0, 0);
 	cylinder->color = NULL;
-	cylinder->rot = NULL;
+	cylinder->rot = ft_new_vect(0, 0, 0);
 	cylinder->radius = -1;
 	return (cylinder);
 }
