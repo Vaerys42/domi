@@ -28,34 +28,32 @@ void		make_rot(t_rt *rt)
 	}
 }
 
-t_coo		*ft_rotation(t_coo *vect, t_coo *rot)
+t_coo		ft_rotation(t_coo vect, t_coo rot)
 {
-	t_coo		*new;
+	t_coo		new;
 
 	if (rot->x == 0 && rot->y == 0 && rot->z == 0)
 		return (vect);
-	if (!(new = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
 	rot = ft_mult_vect(M_PI / 180, rot);
-	if (rot->x != 0)
+	if (rot.x != 0)
 	{
-		new->x = vect->x;
-		new->y = vect->y * cos(rot->x) + vect->z * sin(rot->x);
-		new->z = -vect->y * sin(rot->x) + vect->z * cos(rot->x);
+		new.x = vect.x;
+		new.y = vect.y * cos(rot.x) + vect.z * sin(rot.x);
+		new->z = -vect.y * sin(rot.x) + vect.z * cos(rot.x);
 		vect = new;
 	}
-	if (rot->y != 0)
+	if (rot.y != 0)
 	{
-		new->x = vect->x * cos(rot->y) - vect->z * sin(rot->y);
-		new->y = vect->y;
-		new->z = vect->x * sin(rot->y) + vect->z * cos(rot->y);
+		new.x = vect.x * cos(rot.y) - vect.z * sin(rot.y);
+		new.y = vect.y;
+		new.z = vect.x * sin(rot.y) + vect.z * cos(rot.y);
 		vect = new;
 	}
-	if (rot->z != 0)
+	if (rot.z != 0)
 	{
-		new->x = vect->x * cos(rot->z) + vect->y * sin(rot->z);
-		new->y = -vect->x * sin(rot->z) + vect->y * cos(rot->z);
-		new->z = vect->z;
+		new.x = vect.x * cos(rot.z) + vect.y * sin(rot.z);
+		new.y = -vect.x * sin(rot.z) + vect.y * cos(rot.z);
+		new.z = vect.z;
 	}
 	return (new);
 }

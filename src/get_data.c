@@ -22,11 +22,16 @@ int			tab_len(char **str)
 	return (i);
 }
 
-t_coo		*get_coo(char **str, int err)
+t_coo		get_coo(char **str, int err)
 {
+	t_coo			new;
+
 	if (tab_len(str) != 4)
 		ft_bad_arg(err);
-	return (ft_new_vect(ft_atof(str[1]), ft_atof(str[2]), ft_atof(str[3])));
+	new.x = ft_atof(str[1]);
+	new.y = ft_atof(str[2]);
+	new.z = ft_atof(str[3]);
+	return (new);
 }
 
 t_material	*get_color(char **str)

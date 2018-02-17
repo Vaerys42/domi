@@ -58,8 +58,6 @@ void	ft_malloc_ini(t_rt *rt)
 		ft_malloc_error();
 	if (!(rt->inter->mat = (t_material*)malloc(sizeof(t_material))))
 		ft_malloc_error();
-	if (!(rt->inter->point = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
 }
 
 void	ft_ini(t_rt *rt)

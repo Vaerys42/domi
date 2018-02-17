@@ -17,8 +17,8 @@ double		sphere_dst_rslt(double oh, t_coo sphere_ray, double det)
 	double	ta;
 	double	tb;
 
-	ta = oh * ft_norme(&sphere_ray) + det;
-	tb = oh * ft_norme(&sphere_ray) - det;
+	ta = oh * ft_norme(sphere_ray) + det;
+	tb = oh * ft_norme(sphere_ray) - det;
 	if (ta >= tb && tb > 0)
 		return (tb);
 	return (ta);
@@ -31,14 +31,14 @@ double		ft_check_sphere(t_sphere *sphere, t_ray *ray)
 	double	rr;
 	t_coo	sphere_ray;
 
-	sphere_ray.x = sphere->o->x - ray->o->x;
-	sphere_ray.y = sphere->o->y - ray->o->y;
-	sphere_ray.z = sphere->o->z - ray->o->z;
-	oh = scal(ray->dir, ft_normalize(&sphere_ray));
+	sphere_ray.x = sphere->o.x - ray->o.x;
+	sphere_ray.y = sphere->o.y - ray->o.y;
+	sphere_ray.z = sphere->o.z - ray->o.z;
+	oh = scal(ray->dir, ft_normalize(sphere_ray));
 	if (oh >= 0)
 	{
-		chch = pow(ft_norme(&sphere_ray), 2) -
-		pow(oh * ft_norme(&sphere_ray), 2);
+		chch = pow(ft_norme(sphere_ray), 2) -
+		pow(oh * ft_norme(sphere_ray), 2);
 		rr = sphere->radius * sphere->radius;
 		if (chch <= rr)
 			return (sphere_dst_rslt(oh, sphere_ray, sqrt(rr - chch)));

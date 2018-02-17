@@ -84,5 +84,6 @@ int			ft_add_sphere(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	free(line);
 	return (sphere_list(rt, sphere));
 }

@@ -41,7 +41,7 @@ t_plane		*ini_plane(void)
 int			plane_lst(t_rt *rt, t_plane *plane)
 {
 	ft_plane_info(plane);
-	ft_normalize(plane->norm);
+	plane->norm = ft_normalize(plane->norm);
 	plane->supp = (-1) * plane->o->x * plane->norm->x +
 	(-1) * plane->o->y * plane->norm->y +
 	(-1) * plane->o->z * plane->norm->z;
@@ -84,5 +84,6 @@ int			ft_add_plane(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	free(line);
 	return (plane_lst(rt, plane));
 }

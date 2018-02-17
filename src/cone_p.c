@@ -37,11 +37,9 @@ t_cone		*new_cone(void)
 		ft_malloc_error();
 	cone->next = NULL;
 	cone->o = NULL;
-	if (!(cone->dir = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	cone->dir->x = 0;
-	cone->dir->y = 1;
-	cone->dir->z = 0;
+	cone->dir.x = 0;
+	cone->dir.y = 1;
+	cone->dir.z = 0;
 	cone->color = NULL;
 	cone->rot = NULL;
 	cone->angle = -1;
@@ -52,7 +50,7 @@ t_cone		*new_cone(void)
 int			cone_lst(t_rt *rt, t_cone *cone)
 {
 	ft_cone_info(cone);
-	ft_normalize(cone->dir);
+	cone->dir = ft_normalize(cone->dir);
 	cone->angle = (cone->angle * M_PI) / 180;
 	if (rt->cone == NULL)
 	{
@@ -104,5 +102,6 @@ int			ft_add_cone(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	free(line);
 	return (cone_lst(rt, cone));
 }

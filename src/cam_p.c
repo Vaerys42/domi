@@ -66,5 +66,6 @@ int			ft_add_cam(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	free(line);
 	return (cam_lst(rt, cam));
 }

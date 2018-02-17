@@ -55,9 +55,9 @@ typedef	struct			s_data
 
 typedef struct			s_cylinder
 {
-	t_coo				*o;
-	t_coo				*rot;
-	t_coo				*dir;
+	t_coo				o;
+	t_coo				rot;
+	t_coo				dir;
 	double				radius;
 	double				shine;
 	t_material			*color;
@@ -66,9 +66,9 @@ typedef struct			s_cylinder
 
 typedef	struct			s_cone
 {
-	t_coo				*o;
-	t_coo				*dir;
-	t_coo				*rot;
+	t_coo				o;
+	t_coo				dir;
+	t_coo				rot;
 	double				angle;
 	double				shine;
 	t_material			*color;
@@ -77,7 +77,7 @@ typedef	struct			s_cone
 
 typedef	struct			s_sphere
 {
-	t_coo				*o;
+	t_coo				o;
 	double				radius;
 	t_material			*color;
 	double				shine;
@@ -87,15 +87,15 @@ typedef	struct			s_sphere
 typedef	struct			s_plane
 {
 	t_material			*color;
-	t_coo				*norm;
-	t_coo				*o;
+	t_coo				norm;
+	t_coo				o;
 	double				supp;
 	struct s_plane		*next;
 }						t_plane;
 
 typedef struct			s_light
 {
-	t_coo				*o;
+	t_coo				o;
 	t_material			*color;
 	double				power;
 	double				shine;
@@ -103,18 +103,18 @@ typedef struct			s_light
 
 typedef	struct			s_ray
 {
-	t_coo				*o;
-	t_coo				*dir;
-	t_coo				*obj;
+	t_coo				o;
+	t_coo				dir;
+	t_coo				obj;
 }						t_ray;
 
 typedef	struct			s_cam
 {
-	t_coo				*pos;
-	t_coo				*forw;
-	t_coo				*up;
-	t_coo				*right;
-	t_coo				*rot;
+	t_coo				pos;
+	t_coo				forw;
+	t_coo				up;
+	t_coo				right;
+	t_coo				rot;
 }						t_cam;
 
 typedef	struct			s_view
@@ -122,7 +122,7 @@ typedef	struct			s_view
 	double				screen_ratio;
 	double				height;
 	double				length;
-	t_coo				*up_left;
+	t_coo				up_left;
 }						t_view;
 
 typedef	struct			s_inter
@@ -130,7 +130,7 @@ typedef	struct			s_inter
 	double				dst;
 	t_material			*mat;
 	t_ray				*angle;
-	t_coo				*point;
+	t_coo				point;
 	int					obj;
 }						t_inter;
 
@@ -171,7 +171,7 @@ void					ft_create(t_rt *rt);
 void					parser(t_rt *rt, char *file);
 int						ft_check_obj(char *str, int fd, t_rt *rt);
 
-t_coo					*get_coo(char **str, int err);
+t_coo					get_coo(char **str, int err);
 t_material				*get_color(char **str);
 double					get_radius(char **str);
 
@@ -184,16 +184,16 @@ void					ft_raytracing(t_rt *rt);
 
 void					ft_check_object(t_rt *rt);
 
-t_coo					*ft_new_vect(float x, float y, float z);
-t_coo					*ft_add_vect(t_coo *vect1, t_coo *vect2);
-t_coo					*ft_div_vect(double i, t_coo *vect);
-t_coo					*ft_mult_vect(double i, t_coo *vect);
-t_coo					*ft_sub_vect(t_coo *vect1, t_coo *vect2);
+t_coo					ft_new_vect(float x, float y, float z);
+t_coo					ft_add_vect(t_coo vect1, t_coo vect2);
+t_coo					ft_div_vect(double i, t_coo vect);
+t_coo					ft_mult_vect(double i, t_coo vect);
+t_coo					ft_sub_vect(t_coo vect1, t_coo vect2);
 
-double					scal(t_coo *vect1, t_coo *vect2);
-double					ft_dst(t_coo *point1, t_coo *point2);
-double					ft_norme(t_coo *vect);
-t_coo					*ft_normalize(t_coo *vect);
+double					scal(t_coo vect1, t_coo vect2);
+double					ft_dst(t_coo point1, t_coo point2);
+double					ft_norme(t_coo vect);
+t_coo					ft_normalize(t_coo vect);
 
 double					ft_check_sphere(t_sphere *sphere, t_ray *ray);
 void					check_sphere_inter(t_rt *rt, int type);
@@ -216,7 +216,7 @@ int						ft_add_cam(int fd, t_rt *rt);
 
 void					ft_get_point(t_rt *rt);
 
-t_coo					*ft_rotation(t_coo *vect, t_coo *rot);
+t_coo					ft_rotation(t_coo vect, t_coo rot);
 void					make_rot(t_rt *rt);
 
 #endif

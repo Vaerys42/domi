@@ -12,7 +12,7 @@
 
 #include "../rtv1.h"
 
-void		ft_brillance(t_rt *rt, t_coo *spec)
+void		ft_brillance(t_rt *rt, t_coo spec)
 {
 	rt->inter->mat->r += rt->light->color->r * rt->light->shine *
 	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
@@ -38,7 +38,7 @@ void		ft_get_point(t_rt *rt)
 void		ft_get_light(t_rt *rt)
 {
 	double		angle;
-	t_coo		*spec;
+	t_coo		spec;
 
 	rt->inter->dst = 99999;
 	rt->light->shine = 0;

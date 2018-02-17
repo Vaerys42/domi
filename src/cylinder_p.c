@@ -51,11 +51,9 @@ t_cylinder	*cyl_ini(void)
 
 	if (!(cylinder = (t_cylinder*)malloc(sizeof(t_cylinder))))
 		ft_malloc_error();
-	if (!(cylinder->dir = (t_coo*)malloc(sizeof(t_coo))))
-		ft_malloc_error();
-	cylinder->dir->x = 0;
-	cylinder->dir->y = 1;
-	cylinder->dir->z = 0;
+	cylinder->dir.x = 0;
+	cylinder->dir.y = 1;
+	cylinder->dir.z = 0;
 	cylinder->next = NULL;
 	cylinder->o = NULL;
 	cylinder->color = NULL;
@@ -101,5 +99,6 @@ int			ft_add_cylinder(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	free(line);
 	return (cylinder_list(rt, cylinder));
 }
