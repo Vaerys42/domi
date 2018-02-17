@@ -51,9 +51,7 @@ void		ft_ray(t_rt *rt, int x, int y)
 
 void		ft_ini_ray(t_rt *rt, int x, int y)
 {
-	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left,
-	ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)),
-	ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
+	rt->ray->dir = ft_sub_vect(ft_add_vect(rt->view->up_left, ft_mult_vect(rt->view->length * x / WIN_LEN, rt->cam->right)), ft_mult_vect(rt->view->height * y / WIN_HEIGHT, rt->cam->up));
 	rt->ray->dir = ft_rotation(rt->ray->dir, rt->cam->rot);
 	rt->ray->dir = ft_div_vect(ft_norme(rt->ray->dir), rt->ray->dir);
 }

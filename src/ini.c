@@ -29,7 +29,7 @@ void	ft_ini_cam(t_rt *rt)
 	rt->cam->forw = ft_new_vect(0, 0, 1);
 	rt->cam->up = ft_new_vect(0, 1, 0);
 	rt->cam->right = ft_new_vect(1, 0, 0);
-	//ft_ini_viewplane(rt);
+	ft_ini_viewplane(rt);
 }
 
 void	ft_ini_light(t_rt *rt)
