@@ -53,8 +53,9 @@ void		new_sphere_dst(t_rt *rt, int type, double tmp)
 		rt->inter->obj = SPH;
 	if (type == 1 && rt->inter->obj == SPH)
 	{
-		move_color(rt->inter->mat, rt->sphere->color->r,
-		rt->sphere->color->g, rt->sphere->color->b);
+		rt->inter->mat->r += rt->sphere->color->r * rt->light->amb;
+		rt->inter->mat->g += rt->sphere->color->g * rt->light->amb;
+		rt->inter->mat->b += rt->sphere->color->b * rt->light->amb;
 		rt->light->shine = rt->sphere->shine;
 		rt->inter->angle->o = ft_sub_vect(rt->inter->point,
 		rt->sphere->o);

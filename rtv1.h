@@ -90,6 +90,7 @@ typedef	struct			s_plane
 	t_coo				norm;
 	t_coo				o;
 	double				supp;
+	int					obj;
 	struct s_plane		*next;
 }						t_plane;
 
@@ -99,6 +100,9 @@ typedef struct			s_light
 	t_material			*color;
 	double				power;
 	double				shine;
+	double				amb;
+	int					obj;
+	struct s_light		*next;
 }						t_light;
 
 typedef	struct			s_ray
@@ -132,6 +136,7 @@ typedef	struct			s_inter
 	t_ray				*angle;
 	t_coo				point;
 	int					obj;
+	int					num;
 }						t_inter;
 
 typedef	struct			s_start
@@ -140,6 +145,7 @@ typedef	struct			s_start
 	t_plane				*pln;
 	t_cone				*con;
 	t_cylinder			*cyl;
+	t_light				*lgh;
 }						t_start;
 
 typedef	struct			s_rt
@@ -207,10 +213,12 @@ void					ft_ini_plane(t_rt *rt);
 void					check_cone_inter(t_rt *rt, int type);
 double					ft_check_cone(t_cone *cone, t_ray *ray);
 int						ft_add_cone(int fd, t_rt *rt);
-int						ft_add_plane(int fd, t_rt *rt);
+int						ft_add_plane(int fd, t_rt *rt, int obj);
 
 int						ft_add_cylinder(int fd, t_rt *rt);
 void					check_cylinder_inter(t_rt *rt, int type);
+
+int						ft_add_light(int fd, t_rt *rt);
 
 int						ft_add_cam(int fd, t_rt *rt);
 

@@ -24,11 +24,21 @@ double				ft_check_plane(t_plane *plane, t_ray *ray)
 	return (-a / b);
 }
 
-void				new_plane_dst(t_rt *rt)
+void				new_plane_dst(t_rt *rt, int type, double tmp)
 {
-	move_color(rt->inter->mat, rt->plane->color->r,
-	rt->plane->color->g, rt->plane->color->b);
-	rt->inter->angle->dir = rt->plane->norm;
+	rt->inter->dst = tmp;
+	if (type == 0)
+		{
+			rt->inter->obj = PLN;
+			rt->inter->num = rt->plane->obj;
+		}
+	if (type == 1 && rt->inter->obj == PLN && rt->inter->num == rt->plane->obj)
+	{
+		rt->inter->mat->r += rt->plane->color->r * rt->light->amb;
+		rt->inter->mat->g += rt->plane->color->g * rt->light->amb;
+		rt->inter->mat->b += rt->plane->color->b * rt->light->amb;
+		rt->inter->angle->dir = rt->plane->norm;
+	}
 }
 
 void				check_plane_inter(t_rt *rt, int type)
@@ -44,14 +54,8 @@ void				check_plane_inter(t_rt *rt, int type)
 				tmp = ft_check_plane(rt->plane, rt->ray);
 			else
 				tmp = ft_check_plane(rt->plane, rt->light_ray);
-			if (tmp > 0 && tmp < rt->inter->dst)
-			{
-				rt->inter->dst = tmp;
-				if (type == 0)
-					rt->inter->obj = PLN;
-				if (type != 0 && rt->inter->obj == PLN)
-					new_plane_dst(rt);
-			}
+			if (tmp < rt->inter->dst && tmp > 0)
+				new_plane_dst(rt, type, tmp);
 			rt->plane = rt->plane->next;
 		}
 	}

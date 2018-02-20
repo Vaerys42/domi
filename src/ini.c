@@ -32,19 +32,6 @@ void	ft_ini_cam(t_rt *rt)
 	ft_ini_viewplane(rt);
 }
 
-void	ft_ini_light(t_rt *rt)
-{
-	if (!(rt->light = (t_light*)malloc(sizeof(t_light))))
-		ft_malloc_error();
-	if (!(rt->light->color = (t_material*)malloc(sizeof(t_material))))
-		ft_malloc_error();
-	rt->light->color->r = 1;
-	rt->light->color->g = 1;
-	rt->light->color->b = 1;
-	rt->light->o = ft_new_vect(0, 3, 11);
-	rt->light->power = 0.7;
-}
-
 void	ft_malloc_ini(t_rt *rt)
 {
 	ft_create(rt);
@@ -64,7 +51,6 @@ void	ft_ini(t_rt *rt)
 {
 	ft_malloc_ini(rt);
 	ft_ini_cam(rt);
-	ft_ini_light(rt);
 	rt->ray->o = rt->cam->pos;
 	rt->plane = rt->start->pln;
 	rt->inter->obj = -1;

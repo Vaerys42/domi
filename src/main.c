@@ -47,7 +47,10 @@ int			main(int argc, char **argv)
 		ft_malloc_error();
 	parser(rt, argv[1]);
 	ft_ini(rt);
-	ft_raytracing(rt);
+	if (rt->light != NULL)
+	{
+		ft_raytracing(rt);
+	}
 	mlx_put_image_to_window(rt->data->mlx, rt->data->mlx_window,
 	rt->data->mlx_image, 0, 0);
 	window(rt);

@@ -14,8 +14,14 @@
 
 int			ft_check_obj(char *str, int fd, t_rt *rt)
 {
+	static int obj = 0;
+
+	
 	if (ft_strcmp(str, "plane") == 0)
-		return (ft_add_plane(fd, rt));
+		{	
+			obj++;
+			return (ft_add_plane(fd, rt, obj));
+		}
 	else if (ft_strcmp(str, "sphere") == 0)
 		return (ft_add_sphere(fd, rt));
 	else if (ft_strcmp(str, "cone") == 0)
@@ -24,6 +30,8 @@ int			ft_check_obj(char *str, int fd, t_rt *rt)
 		return (ft_add_cylinder(fd, rt));
 	else if (ft_strcmp(str, "camera") == 0)
 		return (ft_add_cam(fd, rt));
+	else if (ft_strcmp(str, "light") == 0)
+		return (ft_add_light(fd, rt));
 	else
 		return (0);
 	return (0);
@@ -38,10 +46,12 @@ void		ft_ini_struct(t_rt *rt)
 	rt->cone = NULL;
 	rt->cylinder = NULL;
 	rt->cam = NULL;
+	rt->light = NULL;
 	rt->start->sph = NULL;
 	rt->start->pln = NULL;
 	rt->start->con = NULL;
 	rt->start->cyl = NULL;
+	rt->start->lgh = NULL;
 }
 
 void		parser(t_rt *rt, char *file)

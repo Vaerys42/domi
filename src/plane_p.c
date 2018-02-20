@@ -31,6 +31,7 @@ t_plane		*ini_plane(void)
 	plane->o = ft_new_vect(0, 0, 0);
 	plane->color = NULL;
 	plane->norm = ft_new_vect(0, 1, 0);
+	plane->obj = 0;
 	return (plane);
 }
 
@@ -54,7 +55,7 @@ int			plane_lst(t_rt *rt, t_plane *plane)
 	return (1);
 }
 
-int			ft_add_plane(int fd, t_rt *rt)
+int			ft_add_plane(int fd, t_rt *rt, int obj)
 {
 	int			ret;
 	char		*line;
@@ -80,6 +81,7 @@ int			ft_add_plane(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
+	plane->obj = obj;
 	free(line);
 	return (plane_lst(rt, plane));
 }
