@@ -30,6 +30,8 @@ void		ft_bad_arg(int i)
 		ft_putstr("Normal vector error\n");
 	else if (i == 7)
 		ft_putstr("Dir vector error\n");
+	else 
+		ft_putstr("File error\n");
 	exit(-1);
 }
 

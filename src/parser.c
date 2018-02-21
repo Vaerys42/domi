@@ -16,8 +16,9 @@ int			ft_check_obj(char *str, int fd, t_rt *rt)
 {
 	static int obj = 0;
 
-	
-	if (ft_strcmp(str, "plane") == 0)
+	if (str[0] == 0)
+		return (0);
+	else if (ft_strcmp(str, "plane") == 0)
 		{	
 			obj++;
 			return (ft_add_plane(fd, rt, obj));
@@ -69,9 +70,9 @@ void		parser(t_rt *rt, char *file)
 		ft_check_obj(line, fd, rt);
 		free(line);
 	}
-	free(line);
 	if (ret == -1)
 		ft_bad_arg(-1);
+	free(line);
 	if (rt->cam == NULL)
 	{
 		ft_putstr("Needs a cam\n");
