@@ -55,6 +55,26 @@ t_sphere	*sph_ini(void)
 	return (sphere);
 }
 
+void		ft_sphere_line(char **datas, t_sphere *sphere, t_rt *rt, int fd)
+{
+	int		rand;
+
+	if (datas[0] == 0)
+		rand = 0;
+	else if (ft_strcmp(datas[0], "coo:") == 0)
+		sphere->o = get_coo(datas, 2);
+	else if (ft_strcmp(datas[0], "color:") == 0)
+		sphere->color = get_color(datas);
+	else if (ft_strcmp(datas[0], "radius:") == 0)
+		sphere->radius = get_radius(datas);
+	else if (ft_strcmp(datas[0], "shine:") == 0)
+		sphere->shine = get_radius(datas);
+	else if (ft_check_obj(datas[0], fd, rt) == 1)
+		rand = 0;
+	else
+		ft_bad_arg(5);
+}
+
 int			ft_add_sphere(int fd, t_rt *rt)
 {
 	int			ret;
@@ -66,20 +86,7 @@ int			ft_add_sphere(int fd, t_rt *rt)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		datas = ft_strsplit(line, ' ');
-		if (datas[0] == 0)
-			ret++;
-		if (ft_strcmp(datas[0], "coo:") == 0)
-			sphere->o = get_coo(datas, 2);
-		else if (ft_strcmp(datas[0], "color:") == 0)
-			sphere->color = get_color(datas);
-		else if (ft_strcmp(datas[0], "radius:") == 0)
-			sphere->radius = get_radius(datas);
-		else if (ft_strcmp(datas[0], "shine:") == 0)
-			sphere->shine = get_radius(datas);
-		else if (ft_check_obj(datas[0], fd, rt) == 1)
-			ret++;
-		else
-			ft_bad_arg(5);
+		ft_sphere_line(datas, sphere, rt, fd);
 		ft_freetab(datas);
 		free(line);
 	}

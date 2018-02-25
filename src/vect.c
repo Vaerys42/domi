@@ -40,16 +40,6 @@ double		ft_norme(t_coo vect)
 	return (rslt);
 }
 
-t_coo		ft_div_vect(double i, t_coo vect)
-{
-	t_coo		new;
-
-	if (i == 0)
-		return (vect);
-	new = ft_new_vect(vect.x / i, vect.y / i, vect.z / i);
-	return (new);
-}
-
 double		ft_dst(t_coo vect1, t_coo vect2)
 {
 	double		rslt;
@@ -57,30 +47,6 @@ double		ft_dst(t_coo vect1, t_coo vect2)
 	rslt = sqrt(pow(vect2.x - vect1.x, 2) +
 	pow(vect2.y - vect1.y, 2) + pow(vect2.z - vect1.z, 2));
 	return (rslt);
-}
-
-t_coo		ft_mult_vect(double i, t_coo vect)
-{
-	t_coo		new;
-
-	new = ft_new_vect(i * vect.x, i * vect.y, i * vect.z);
-	return (new);
-}
-
-t_coo		ft_add_vect(t_coo vect1, t_coo vect2)
-{
-	t_coo		new;
-
-	new = ft_new_vect(vect1.x + vect2.x, vect1.y + vect2.y, vect1.z + vect2.z);
-	return (new);
-}
-
-t_coo		ft_sub_vect(t_coo vect1, t_coo vect2)
-{
-	t_coo		new;
-
-	new = ft_new_vect(vect1.x - vect2.x, vect1.y - vect2.y, vect1.z - vect2.z);
-	return (new);
 }
 
 double		scal(t_coo v1, t_coo v2)

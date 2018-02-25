@@ -28,13 +28,10 @@ void		make_rot(t_rt *rt)
 	}
 }
 
-t_coo		ft_rotation(t_coo vect, t_coo rot)
+t_coo		ft_rotation_2(t_coo vect, t_coo rot)
 {
-	t_coo		new;
+	t_coo	new;
 
-	if (rot.x == 0 && rot.y == 0 && rot.z == 0)
-		return (vect);
-	rot = ft_mult_vect(M_PI / 180, rot);
 	if (rot.x != 0)
 	{
 		new.x = vect.x;
@@ -56,4 +53,12 @@ t_coo		ft_rotation(t_coo vect, t_coo rot)
 		new.z = vect.z;
 	}
 	return (new);
+}
+
+t_coo		ft_rotation(t_coo vect, t_coo rot)
+{
+	if (rot.x == 0 && rot.y == 0 && rot.z == 0)
+		return (vect);
+	rot = ft_mult_vect(M_PI / 180, rot);
+	return (ft_rotation_2(vect, rot));
 }

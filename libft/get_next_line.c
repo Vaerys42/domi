@@ -64,13 +64,14 @@ int		get_next_line(const int fd, char **line)
 		tmp = ft_strnew(BUFF_SIZE + 1);
 		if (tmp == NULL || (read(fd, tmp, BUFF_SIZE) == -1) || line == NULL)
 		{
-			tmp = NULL;
+			if (tmp != NULL)
+				free(tmp);
 			return (-1);
 		}
 	}
 	if (ft_strlen(tmp) == 0 && read(fd, tmp, BUFF_SIZE) == 0)
 	{
-		tmp = NULL;
+		(void)tmp;
 		return (0);
 	}
 	*line = ft_strnew(BUFF_SIZE + 1);

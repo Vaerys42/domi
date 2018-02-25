@@ -5,6 +5,7 @@ SRC =	src/main.c \
 		src/error.c \
 		src/key.c \
 		src/vect.c \
+		src/vect_2.c \
 		src/raytracing.c \
 		src/ft_check_object.c \
 		src/sphere.c \

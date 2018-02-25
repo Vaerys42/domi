@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_p.c                                         :+:      :+:    :+:   */
+/*   light_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/30 22:21:24 by kboucaud          #+#    #+#             */
-/*   Updated: 2018/01/30 22:21:25 by kboucaud         ###   ########.fr       */
+/*   Created: 2018/02/25 22:08:43 by kboucaud          #+#    #+#             */
+/*   Updated: 2018/02/25 22:08:48 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			light_list(t_rt *rt, t_light *light)
 	return (1);
 }
 
-t_light	*light_ini(void)
+t_light		*light_ini(void)
 {
 	t_light	*light;
 
@@ -48,8 +48,8 @@ t_light	*light_ini(void)
 	light->next = NULL;
 	light->o = ft_new_vect(0, 0, 0);
 	light->color = NULL;
-    light->power = -1;
-    light->shine = -1;
+	light->power = -1;
+	light->shine = -1;
 	light->amb = 0.2;
 	return (light);
 }
@@ -59,7 +59,7 @@ int			ft_add_light(int fd, t_rt *rt)
 	int			ret;
 	char		*line;
 	char		**datas;
-	t_light	*light;
+	t_light		*light;
 
 	light = light_ini();
 	while ((ret = get_next_line(fd, &line)) > 0)

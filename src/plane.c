@@ -28,10 +28,10 @@ void				new_plane_dst(t_rt *rt, int type, double tmp)
 {
 	rt->inter->dst = tmp;
 	if (type == 0)
-		{
-			rt->inter->obj = PLN;
-			rt->inter->num = rt->plane->obj;
-		}
+	{
+		rt->inter->obj = PLN;
+		rt->inter->num = rt->plane->obj;
+	}
 	if (type == 1 && rt->inter->obj == PLN && rt->inter->num == rt->plane->obj)
 	{
 		rt->inter->mat->r += rt->plane->color->r * rt->light->amb;
