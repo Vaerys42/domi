@@ -51,6 +51,7 @@ t_sphere	*sph_ini(void)
 	sphere->o = ft_new_vect(0, 0, 0);
 	sphere->color = NULL;
 	sphere->radius = -1;
+	sphere->shine = -1;
 	return (sphere);
 }
 
@@ -82,6 +83,5 @@ int			ft_add_sphere(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
-	free(line);
 	return (sphere_list(rt, sphere));
 }

@@ -93,6 +93,5 @@ int			ft_add_cylinder(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
-	free(line);
 	return (cylinder_list(rt, cylinder));
 }

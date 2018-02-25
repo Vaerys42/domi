@@ -82,6 +82,5 @@ int			ft_add_plane(int fd, t_rt *rt, int obj)
 		free(line);
 	}
 	plane->obj = obj;
-	free(line);
 	return (plane_lst(rt, plane));
 }

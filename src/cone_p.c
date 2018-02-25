@@ -96,6 +96,5 @@ int			ft_add_cone(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
-	free(line);
 	return (cone_lst(rt, cone));
 }

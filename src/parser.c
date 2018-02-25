@@ -72,7 +72,6 @@ void		parser(t_rt *rt, char *file)
 	}
 	if (ret == -1)
 		ft_bad_arg(-1);
-	free(line);
 	if (rt->cam == NULL)
 	{
 		ft_putstr("Needs a cam\n");

@@ -27,10 +27,8 @@ char	*ft_short(char *str, int len)
 	char	*new;
 	int		i;
 
-	if (!(new = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		ft_malloc_error();
+	new = ft_strnew(BUFF_SIZE + 1);
 	i = 0;
-	ft_bzero(new, BUFF_SIZE + 1);
 	while (len + i < BUFF_SIZE)
 	{
 		new[i] = str[len + i];
@@ -63,20 +61,19 @@ int		get_next_line(const int fd, char **line)
 
 	if (tmp == NULL)
 	{
-		if ((tmp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) != NULL)
-			ft_bzero(tmp, BUFF_SIZE + 1);
+		tmp = ft_strnew(BUFF_SIZE + 1);
 		if (tmp == NULL || (read(fd, tmp, BUFF_SIZE) == -1) || line == NULL)
 		{
 			tmp = NULL;
 			return (-1);
 		}
 	}
-	*line = ft_strdup("");
 	if (ft_strlen(tmp) == 0 && read(fd, tmp, BUFF_SIZE) == 0)
 	{
 		tmp = NULL;
 		return (0);
 	}
+	*line = ft_strnew(BUFF_SIZE + 1);
 	if (ft_next(&tmp, line, fd) == -1)
 		return (-1);
 	return (1);

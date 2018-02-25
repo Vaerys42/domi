@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1
 
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);

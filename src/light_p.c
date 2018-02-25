@@ -80,6 +80,5 @@ int			ft_add_light(int fd, t_rt *rt)
 		ft_freetab(datas);
 		free(line);
 	}
-	free(line);
 	return (light_list(rt, light));
 }
