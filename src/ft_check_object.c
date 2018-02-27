@@ -18,7 +18,7 @@ void		ft_brillance(t_rt *rt)
 
 	spec = ft_normalize(ft_add_vect(rt->light_ray->dir, ft_mult_vect(-1 *
 	scal(rt->light_ray->dir, rt->inter->angle->dir), rt->inter->angle->dir)));
-	if (-scal(rt->light_ray->dir, rt->inter->angle->dir) < 0)
+	if (-scal(rt->light_ray->dir, rt->inter->angle->dir) < 0.01)
 		return ;
 	rt->inter->mat->r += rt->light->color->r * rt->light->shine *
 	pow(scal(spec, ft_sub_vect(spec, rt->light_ray->dir)), 2.5);
@@ -40,9 +40,12 @@ void		ft_light_diffuse(t_rt *rt)
 
 	angle = -scal(rt->light_ray->dir, rt->inter->angle->dir);
 	angle = (angle < 0.1) ? 0.1 : angle;
-	rt->inter->mat->r += rt->light->color->r * angle * rt->light->power;
-	rt->inter->mat->g += rt->light->color->g * angle * rt->light->power;
-	rt->inter->mat->b += rt->light->color->b * angle * rt->light->power;
+	rt->inter->mat->r *= (rt->light->color->r * angle * rt->light->power +
+	rt->light->amb);
+	rt->inter->mat->g *= (rt->light->color->g * angle * rt->light->power +
+	rt->light->amb);
+	rt->inter->mat->b *= (rt->light->color->b * angle * rt->light->power +
+	rt->light->amb);
 }
 
 void		ft_get_light(t_rt *rt)

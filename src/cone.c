@@ -51,9 +51,9 @@ void		new_cone_dst(t_rt *rt, int type, double tmp)
 		rt->inter->obj = CON;
 	if (type == 1 && rt->inter->obj == CON)
 	{
-		rt->inter->mat->r += rt->cone->color->r * rt->light->amb;
-		rt->inter->mat->g += rt->cone->color->g * rt->light->amb;
-		rt->inter->mat->b += rt->cone->color->b * rt->light->amb;
+		rt->inter->mat->r += rt->cone->color->r;
+		rt->inter->mat->g += rt->cone->color->g;
+		rt->inter->mat->b += rt->cone->color->b;
 		rt->light->shine = rt->cone->shine;
 		rt->inter->angle->dir.x = rt->inter->point.x - rt->cone->o.x;
 		rt->inter->angle->dir.y = rt->inter->point.y;
