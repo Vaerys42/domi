@@ -62,7 +62,7 @@ void		ft_cyl_read_line(char **datas, t_cylinder *cyl, t_rt *rt, int fd)
 
 	if (datas[0] == 0)
 		rand = 0;
-	if (ft_strcmp(datas[0], "coo:") == 0)
+	else if (ft_strcmp(datas[0], "coo:") == 0)
 		cyl->o = get_coo(datas, 2);
 	else if (ft_strcmp(datas[0], "color:") == 0)
 		cyl->color = get_color(datas);

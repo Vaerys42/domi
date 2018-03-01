@@ -102,7 +102,6 @@ typedef struct			s_light
 	double				shine;
 	double				amb;
 	int					obj;
-	struct s_light		*next;
 }						t_light;
 
 typedef	struct			s_ray
@@ -145,7 +144,6 @@ typedef	struct			s_start
 	t_plane				*pln;
 	t_cone				*con;
 	t_cylinder			*cyl;
-	t_light				*lgh;
 }						t_start;
 
 typedef	struct			s_rt

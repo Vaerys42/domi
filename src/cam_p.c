@@ -42,7 +42,7 @@ int			ft_add_cam(int fd, t_rt *rt)
 		datas = ft_strsplit(line, ' ');
 		if (datas[0] == 0)
 			ret++;
-		if (ft_strcmp(datas[0], "coo:") == 0)
+		else if (ft_strcmp(datas[0], "coo:") == 0)
 			cam->pos = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "rot:") == 0)
 			cam->rot = get_coo(datas, 7);

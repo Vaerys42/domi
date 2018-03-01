@@ -52,7 +52,6 @@ void		ft_ini_struct(t_rt *rt)
 	rt->start->pln = NULL;
 	rt->start->con = NULL;
 	rt->start->cyl = NULL;
-	rt->start->lgh = NULL;
 }
 
 void		parser(t_rt *rt, char *file)

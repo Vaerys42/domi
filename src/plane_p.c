@@ -61,7 +61,7 @@ void		ft_plane_line(char **datas, int fd, t_rt *rt, t_plane *plane)
 
 	if (datas[0] == 0)
 		rand = 0;
-	if (ft_strcmp(datas[0], "coo:") == 0)
+	else if (ft_strcmp(datas[0], "coo:") == 0)
 		plane->o = get_coo(datas, 2);
 	else if (ft_strcmp(datas[0], "color:") == 0)
 		plane->color = get_color(datas);

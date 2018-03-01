@@ -53,24 +53,15 @@ void		ft_get_light(t_rt *rt)
 	rt->inter->mat->r = 0;
 	rt->inter->mat->g = 0;
 	rt->inter->mat->b = 0;
-	if (rt->start->lgh != NULL)
-	{
-		rt->light = rt->start->lgh;
-		while (rt->light != NULL)
-		{
-			rt->inter->dst = 99999;
-			rt->light_ray->o = rt->light->o;
-			rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point,
-			rt->light->o));
-			check_sphere_inter(rt, 1);
-			check_cone_inter(rt, 1);
-			check_cylinder_inter(rt, 1);
-			check_plane_inter(rt, 1);
-			ft_light_diffuse(rt);
-			ft_brillance(rt);
-			rt->light = rt->light->next;
-		}
-	}
+	rt->inter->dst = 99999;
+	rt->light_ray->o = rt->light->o;
+	rt->light_ray->dir = ft_normalize(ft_sub_vect(rt->inter->point,
+	rt->light->o));
+	check_sphere_inter(rt, 1);
+	check_cone_inter(rt, 1);
+	check_cylinder_inter(rt, 1);
+	check_plane_inter(rt, 1);
+	ft_light_diffuse(rt);
 }
 
 void		ft_check_object(t_rt *rt)

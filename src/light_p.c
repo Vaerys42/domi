@@ -26,16 +26,7 @@ void		ft_light_info(t_light *light)
 int			light_list(t_rt *rt, t_light *light)
 {
 	ft_light_info(light);
-	if (rt->light == NULL)
-	{
-		rt->light = light;
-		rt->start->lgh = rt->light;
-	}
-	else
-	{
-		rt->light->next = light;
-		rt->light = rt->light->next;
-	}
+	rt->light = light;
 	return (1);
 }
 
@@ -45,7 +36,6 @@ t_light		*light_ini(void)
 
 	if (!(light = (t_light*)malloc(sizeof(t_light))))
 		ft_malloc_error();
-	light->next = NULL;
 	light->o = ft_new_vect(0, 0, 0);
 	light->color = NULL;
 	light->power = -1;
@@ -67,7 +57,7 @@ int			ft_add_light(int fd, t_rt *rt)
 		datas = ft_strsplit(line, ' ');
 		if (datas[0] == 0)
 			ret++;
-		if (ft_strcmp(datas[0], "coo:") == 0)
+		else if (ft_strcmp(datas[0], "coo:") == 0)
 			light->o = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "color:") == 0)
 			light->color = get_color(datas);
