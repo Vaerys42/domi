@@ -46,7 +46,7 @@ int			ft_add_cam(int fd, t_rt *rt)
 			cam->pos = get_coo(datas, 2);
 		else if (ft_strcmp(datas[0], "rot:") == 0)
 			cam->rot = get_coo(datas, 7);
-		else if (ft_check_obj(datas[0], fd, rt) == 1)
+		else if (datas[1] == NULL && ft_check_obj(datas[0], fd, rt) == 1)
 			ret++;
 		else
 			ft_bad_arg(5);

@@ -63,7 +63,7 @@ int			ft_add_light(int fd, t_rt *rt)
 			light->color = get_color(datas);
 		else if (ft_strcmp(datas[0], "pow:") == 0)
 			light->power = get_radius(datas);
-		else if (ft_check_obj(datas[0], fd, rt) == 1)
+		else if (datas[1] == NULL && ft_check_obj(datas[0], fd, rt) == 1)
 			ret++;
 		else
 			ft_bad_arg(5);

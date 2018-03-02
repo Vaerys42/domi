@@ -34,7 +34,7 @@ int			ft_check_obj(char *str, int fd, t_rt *rt)
 	else if (ft_strcmp(str, "light") == 0)
 		return (ft_add_light(fd, rt));
 	else
-		return (0);
+		ft_bad_arg(5);
 	return (0);
 }
 
