@@ -26,7 +26,13 @@ void		ft_light_info(t_light *light)
 int			light_list(t_rt *rt, t_light *light)
 {
 	ft_light_info(light);
-	rt->light = light;
+	if (rt->light != NULL)
+	{
+		free(light->color);
+		free(light);
+	}
+	else
+		rt->light = light;
 	return (1);
 }
 
