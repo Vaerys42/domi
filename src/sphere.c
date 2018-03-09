@@ -34,9 +34,11 @@ double		ft_check_sphere(t_sphere *sphere, t_ray *ray)
 	a = scal(ray->dir, ray->dir);
 	b = 2 * (scal(ray->dir, ray->obj));
 	c = scal(ray->obj, ray->obj) - pow(sphere->radius, 2);
-	if ((b * b - (4 * a * c)) < 0)
-		return (0);
-	return (sphere_dst_rslt(a, b, c));
+	if (fabs((b * b - (4 * a * c))) <= 0.0001)
+		return (-b / (2 * a));
+	else if ((b * b - (4 * a * c)) > 0.0001)
+		return (sphere_dst_rslt(a, b, c));
+	return (0);
 }
 
 void		new_sphere_dst(t_rt *rt, int type, double tmp)
