@@ -37,11 +37,11 @@ double		ft_check_cone(t_cone *cone, t_ray *ray)
 	b = (scal(ray->dir, ray->obj) - k * (scal(ray->dir, cone->dir) *
 	scal(ray->obj, cone->dir))) * 2;
 	c = scal(ray->obj, ray->obj) - k * pow(scal(ray->obj, cone->dir), 2);
-	if (a == 0)
+	if (fabs((b * b - (4 * a * c))) <= 0.0001)
 		return (-c / b);
-	if ((b * b - (4 * a * c)) < 0)
-		return (0);
-	return (cone_dst_rslt(a, b, c));
+	if ((b * b - (4 * a * c)) > 0.0001)
+		return (cone_dst_rslt(a, b, c));
+	return (0);
 }
 
 void		new_cone_dst(t_rt *rt, int type, double tmp)
