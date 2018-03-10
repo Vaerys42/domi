@@ -12,33 +12,21 @@
 
 #include "../rtv1.h"
 
-double		sphere_dst_rslt(double a, double b, double c)
-{
-	double	ta;
-	double	tb;
-
-	ta = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
-	tb = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
-	if (ta > tb && tb > 0)
-		return (tb);
-	return (ta);
-}
-
 double		ft_check_sphere(t_sphere *sphere, t_ray *ray)
 {
 	double		a;
 	double		b;
 	double		c;
+	double		delta;
 
 	ray->obj = ft_sub_vect(ray->o, sphere->o);
 	a = scal(ray->dir, ray->dir);
 	b = 2 * (scal(ray->dir, ray->obj));
 	c = scal(ray->obj, ray->obj) - pow(sphere->radius, 2);
-	if (fabs((b * b - (4 * a * c))) <= 0.0001)
-		return (-b / (2 * a));
-	else if ((b * b - (4 * a * c)) > 0.0001)
-		return (sphere_dst_rslt(a, b, c));
-	return (0);
+	delta = b * b - (4 * a * c);
+	if (delta < -0.0001)
+		return (0);
+	return (disc_eq(a, b, delta));
 }
 
 void		new_sphere_dst(t_rt *rt, int type, double tmp)

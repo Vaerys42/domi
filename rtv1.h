@@ -225,4 +225,6 @@ void					ft_get_point(t_rt *rt);
 t_coo					ft_rotation(t_coo vect, t_coo rot);
 void					make_rot(t_rt *rt);
 
+double					disc_eq(double a, double b, double delta);
+
 #endif

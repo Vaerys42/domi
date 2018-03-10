@@ -12,23 +12,12 @@
 
 #include "../rtv1.h"
 
-double		cylinder_dst_rslt(double a, double b, double c)
-{
-	double	ta;
-	double	tb;
-
-	ta = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
-	tb = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
-	if (ta > tb && tb > 0)
-		return (tb);
-	return (ta);
-}
-
 double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 {
 	double		a;
 	double		b;
 	double		c;
+	double		delta;
 
 	ray->obj = ft_sub_vect(ray->o, cylinder->o);
 	a = scal(ray->dir, ray->dir) - pow(scal(ray->dir, cylinder->dir), 2);
@@ -36,11 +25,10 @@ double		ft_check_cylinder(t_cylinder *cylinder, t_ray *ray)
 	scal(ray->obj, cylinder->dir)));
 	c = scal(ray->obj, ray->obj) - pow(scal(ray->obj, cylinder->dir), 2) -
 	pow(cylinder->radius, 2);
-	if (a == 0)
-		return (-c / b);
-	if ((b * b - (4 * a * c)) < 0)
+	delta = b * b - (4 * a * c);
+	if (delta < -0.0001)
 		return (0);
-	return (cylinder_dst_rslt(a, b, c));
+	return (disc_eq(a, b, delta));
 }
 
 void		new_cylinder_dst(t_rt *rt, int type, double tmp)

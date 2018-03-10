@@ -12,13 +12,13 @@
 
 #include "../rtv1.h"
 
-double		cone_dst_rslt(double a, double b, double c)
+double		disc_eq(double a, double b, double delta)
 {
 	double	ta;
 	double	tb;
 
-	ta = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
-	tb = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
+	ta = (-b - sqrt(fabs(delta))) / (2 * a);
+	tb = (-b + sqrt(fabs(delta))) / (2 * a);
 	if (ta > tb && tb > 0)
 		return (tb);
 	return (ta);
@@ -30,6 +30,7 @@ double		ft_check_cone(t_cone *cone, t_ray *ray)
 	double		b;
 	double		c;
 	double		k;
+	double		delta;
 
 	k = pow(tan(cone->angle / 2), 2) + 1;
 	ray->obj = ft_sub_vect(ray->o, cone->o);
@@ -37,11 +38,12 @@ double		ft_check_cone(t_cone *cone, t_ray *ray)
 	b = (scal(ray->dir, ray->obj) - k * (scal(ray->dir, cone->dir) *
 	scal(ray->obj, cone->dir))) * 2;
 	c = scal(ray->obj, ray->obj) - k * pow(scal(ray->obj, cone->dir), 2);
-	if (fabs((b * b - (4 * a * c))) <= 0.0001)
+	delta = b * b - (4 * a * c);
+	if (a == 0)
 		return (-c / b);
-	if ((b * b - (4 * a * c)) > 0.0001)
-		return (cone_dst_rslt(a, b, c));
-	return (0);
+	else if (delta < -0.0001)
+		return (0);
+	return (disc_eq(a, b, delta));
 }
 
 void		new_cone_dst(t_rt *rt, int type, double tmp)
